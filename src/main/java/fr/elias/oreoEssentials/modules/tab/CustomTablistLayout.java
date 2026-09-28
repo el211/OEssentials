@@ -238,6 +238,7 @@ public class CustomTablistLayout {
         vanillaTabInterceptor = new PacketListenerAbstract(PacketListenerPriority.HIGH) {
             @Override
             public void onPacketSend(PacketSendEvent event) {
+                if (event.isCancelled()) return;
                 if (event.getPacketType() != PacketType.Play.Server.PLAYER_INFO_UPDATE) return;
                 if (ptm == null) return;
 
@@ -247,44 +248,10 @@ public class CustomTablistLayout {
 
                 try {
                     WrapperPlayServerPlayerInfoUpdate wrapper = new WrapperPlayServerPlayerInfoUpdate(event);
-                    java.util.EnumSet<WrapperPlayServerPlayerInfoUpdate.Action> actions = wrapper.getActions();
-                    List<WrapperPlayServerPlayerInfoUpdate.PlayerInfo> entries = wrapper.getEntries();
-
-                    // Pass our own fake-entry packets through untouched.
-                    boolean hasOurEntries = entries.stream()
-                            .anyMatch(info -> isFakeUuid(info.getProfileId()));
-                    if (hasOurEntries) return;
-
-                    // Only intercept packets that are adding player profiles.
-                    // UPDATE_LISTED-only packets (no ADD_PLAYER) are our own
-                    // delistRealPlayers() calls — let them through so real player
-                    // rows are correctly hidden (listed=false) on the client.
-                    // Cancelling those too is what caused the doubled-column bug.
-                    if (!actions.contains(WrapperPlayServerPlayerInfoUpdate.Action.ADD_PLAYER)) return;
-
-                    // Cancel vanilla ADD_PLAYER packets for real players.
-                    // Avoid markForReEncode — that path re-serialises the packet
-                    // before ViaVersion sees it, and the translation layer on the
-                    // proxy can produce a malformed packet that the client drops or
-                    // partially processes (flicker).
-                    // INITIALIZE_CHAT must reach the client for MC 1.19+ signed chat;
-                    // if it is bundled with ADD_PLAYER we strip the profile actions
-                    // and re-send only the chat-session portion.
-                    boolean hasInitChat = actions.contains(
-                            WrapperPlayServerPlayerInfoUpdate.Action.INITIALIZE_CHAT);
-                    event.setCancelled(true);
-
-                    if (hasInitChat) {
-                        // Re-send only the INITIALIZE_CHAT action so signed-chat
-                        // handshakes still work while UPDATE_LISTED is suppressed.
-                        Player bukkit = org.bukkit.Bukkit.getPlayer(user.getUUID());
-                        if (bukkit != null && bukkit.isOnline()) {
-                            com.github.retrooper.packetevents.PacketEvents.getAPI()
-                                    .getPlayerManager().sendPacket(bukkit,
-                                    new WrapperPlayServerPlayerInfoUpdate(
-                                            java.util.EnumSet.of(WrapperPlayServerPlayerInfoUpdate.Action.INITIALIZE_CHAT),
-                                            entries));
-                        }
+                    // The client needs ADD_PLAYER profiles to spawn players in the world.
+                    // Preserve every action (including signed chat), changing only tab visibility.
+                    if (delistRealEntries(wrapper)) {
+                        event.markForReEncode(true);
                     }
                 } catch (Throwable t) {
                     plugin.getLogger().warning("[CustomTab] Interceptor error: " + t.getMessage());
@@ -298,6 +265,21 @@ public class CustomTablistLayout {
             plugin.getLogger().warning("[CustomTab] Failed to register vanilla tab interceptor: " + t.getMessage());
             vanillaTabInterceptor = null;
         }
+    }
+
+    static boolean delistRealEntries(WrapperPlayServerPlayerInfoUpdate wrapper) {
+        if (!wrapper.getActions().contains(WrapperPlayServerPlayerInfoUpdate.Action.UPDATE_LISTED)) {
+            return false;
+        }
+        boolean changed = false;
+        for (WrapperPlayServerPlayerInfoUpdate.PlayerInfo info : wrapper.getEntries()) {
+            // Handle mixed packets per entry so decorative rows remain listed.
+            if (!isFakeUuid(info.getProfileId()) && info.isListed()) {
+                info.setListed(false);
+                changed = true;
+            }
+        }
+        return changed;
     }
 
     // ── Main update loop ──────────────────────────────────────────────────────
