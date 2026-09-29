@@ -1,6 +1,6 @@
 package fr.elias.oreoEssentials.api;
 
-import fr.elias.oreoEssentials.modules.customcraft.CustomRecipe;
+import fr.elias.oreoEssentials.crafting.internal.customcraft.CustomRecipe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

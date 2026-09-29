@@ -1,6 +1,6 @@
 package fr.elias.oreoEssentials.api;
 
-import fr.elias.oreoEssentials.modules.portals.PortalsManager;
+import fr.elias.oreoEssentials.portals.internal.PortalsManager;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;

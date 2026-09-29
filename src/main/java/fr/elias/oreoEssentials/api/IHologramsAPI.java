@@ -1,7 +1,7 @@
 package fr.elias.oreoEssentials.api;
 
-import fr.elias.oreoEssentials.modules.holograms.api.hologram.Hologram;
-import fr.elias.oreoEssentials.modules.holograms.api.data.HologramData;
+import fr.elias.oreoEssentials.holograms.internal.api.hologram.Hologram;
+import fr.elias.oreoEssentials.holograms.internal.api.data.HologramData;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -10,9 +10,9 @@ import java.util.Optional;
 /**
  * API for the Holograms module (OHolograms).
  *
- * <p>This is a thin delegate over the existing {@link fr.elias.oreoEssentials.modules.holograms.api.HologramManager}
+ * <p>This is a thin delegate over the existing {@link fr.elias.oreoEssentials.holograms.internal.api.HologramManager}
  * interface, which also has its own rich event system in
- * {@code fr.elias.oreoEssentials.modules.holograms.api.events}.
+ * {@code fr.elias.oreoEssentials.holograms.internal.api.events}.
  *
  * <p>Obtain via {@link OreoEssentialsAPI#holograms()}. Returns {@code null} if OHolograms is disabled.
  */

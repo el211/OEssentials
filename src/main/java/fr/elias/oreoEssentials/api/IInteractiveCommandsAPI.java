@@ -1,6 +1,6 @@
 package fr.elias.oreoEssentials.api;
 
-import fr.elias.oreoEssentials.modules.ic.ICEntry;
+import fr.elias.oreoEssentials.commands.internal.ic.ICEntry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

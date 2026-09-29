@@ -1,6 +1,6 @@
 package fr.elias.oreoEssentials.api;
 
-import fr.elias.oreoEssentials.modules.kits.Kit;
+import fr.elias.oreoEssentials.kits.internal.Kit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

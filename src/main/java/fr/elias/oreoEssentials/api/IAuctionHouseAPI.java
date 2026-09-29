@@ -1,7 +1,7 @@
 package fr.elias.oreoEssentials.api;
 
-import fr.elias.oreoEssentials.modules.auctionhouse.models.Auction;
-import fr.elias.oreoEssentials.modules.auctionhouse.models.AuctionCategory;
+import fr.elias.oreoEssentials.inventory.internal.auctionhouse.models.Auction;
+import fr.elias.oreoEssentials.inventory.internal.auctionhouse.models.AuctionCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;

@@ -1,6 +1,6 @@
 package fr.elias.oreoEssentials.api;
 
-import fr.elias.oreoEssentials.modules.playerwarp.PlayerWarp;
+import fr.elias.oreoEssentials.storage.internal.playerwarp.PlayerWarp;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;

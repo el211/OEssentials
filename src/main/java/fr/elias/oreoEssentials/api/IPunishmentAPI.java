@@ -1,6 +1,6 @@
 package fr.elias.oreoEssentials.api;
 
-import fr.elias.oreoEssentials.modules.punishment.PunishmentLogger;
+import fr.elias.oreoEssentials.punishment.internal.PunishmentLogger;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package fr.elias.oreoEssentials.api;
 
-import fr.elias.oreoEssentials.modules.shop.models.Shop;
-import fr.elias.oreoEssentials.modules.shop.models.ShopItem;
+import fr.elias.oreoEssentials.shop.internal.models.Shop;
+import fr.elias.oreoEssentials.shop.internal.models.ShopItem;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
