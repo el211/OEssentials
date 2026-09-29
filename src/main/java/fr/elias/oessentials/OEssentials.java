@@ -187,7 +187,10 @@ public final class OEssentials extends JavaPlugin {
         reorganizeDataFolder();
         try {
             modulith = OreoModules.start(this);
-            getLogger().info("OEssentials enabled with " + modulith.runtime().modules().size() + " modules.");
+            java.util.List<String> moduleIds = modulith.runtime().modules().stream()
+                    .map(dev.oreo.modulith.core.ModuleDescriptor::id)
+                    .collect(java.util.stream.Collectors.toList());
+            fr.elias.oessentials.platform.StartupBanner.print(this, moduleIds);
         } catch (RuntimeException failure) {
             getLogger().log(java.util.logging.Level.SEVERE, "OEssentials module startup failed", failure);
             getServer().getPluginManager().disablePlugin(this);
