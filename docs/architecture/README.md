@@ -34,7 +34,7 @@ Build with:
 ./gradlew shadowJar        # just the plugin jar
 ```
 
-The distributable artifact is `build/libs/OEssentials-6.9-SNAPSHOT.jar` (the
+The distributable artifact is `build/libs/OEssentials-7.0.jar` (the
 `-plain.jar` beside it is the unshaded classes and is not used for deployment).
 
 > Note: `build.gradle.kts` lists `mavenLocal()` first so the build still succeeds when
