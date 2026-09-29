@@ -1,0 +1,72 @@
+package fr.elias.oreoEssentials.commands.internal.commands.core.playercommands;
+
+import fr.elias.oreoEssentials.OreoEssentials;
+import fr.elias.oreoEssentials.platform.commands.OreoCommand;
+import fr.elias.oreoEssentials.shared.Lang;
+import fr.elias.oreoEssentials.platform.scheduling.OreScheduler;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+import java.util.List;
+
+public class BottomCommand implements OreoCommand {
+
+    @Override public String name() { return "bottom"; }
+    @Override public List<String> aliases() { return List.of(); }
+    @Override public String permission() { return "oreo.bottom"; }
+    @Override public String usage() { return ""; }
+    @Override public boolean playerOnly() { return true; }
+
+    @Override
+    public boolean execute(CommandSender sender, String label, String[] args) {
+        Player p = (Player) sender;
+        Location loc = p.getLocation();
+        World world = p.getWorld();
+
+        int x = loc.getBlockX();
+        int z = loc.getBlockZ();
+        int minY = world.getMinHeight();
+
+        int floorY = -1;
+        for (int y = minY; y < world.getMaxHeight() - 1; y++) {
+            Material type = world.getBlockAt(x, y, z).getType();
+            if (!type.isAir() && type != Material.WATER && type != Material.LAVA
+                    && type != Material.KELP && type != Material.KELP_PLANT
+                    && type != Material.SEAGRASS && type != Material.TALL_SEAGRASS) {
+                Material above1 = world.getBlockAt(x, y + 1, z).getType();
+                Material above2 = world.getBlockAt(x, y + 2, z).getType();
+                if (above1.isAir() && above2.isAir()) {
+                    floorY = y;
+                    break;
+                }
+            }
+        }
+
+        if (floorY == -1) {
+            Lang.send(p, "bottom.no-floor", "<red>No safe floor found below you.</red>");
+            return true;
+        }
+
+        Location dest = new Location(world, x + 0.5, floorY + 1, z + 0.5, loc.getYaw(), loc.getPitch());
+        if (OreScheduler.isFolia()) {
+            p.teleportAsync(dest).whenComplete((ok, err) ->
+                    OreScheduler.runForEntity(OreoEssentials.get(), p, () -> {
+                        if (err == null && Boolean.TRUE.equals(ok)) {
+                            Lang.send(p, "bottom.teleported", "<green>Teleported to the bottom.</green>");
+                        } else {
+                            Lang.send(p, "bottom.failed", "<red>Teleport failed.</red>");
+                        }
+                    }));
+        } else {
+            if (p.teleport(dest)) {
+                Lang.send(p, "bottom.teleported", "<green>Teleported to the bottom.</green>");
+            } else {
+                Lang.send(p, "bottom.failed", "<red>Teleport failed.</red>");
+            }
+        }
+        return true;
+    }
+}

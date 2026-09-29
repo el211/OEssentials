@@ -1,0 +1,52 @@
+package fr.elias.oreoEssentials.discord.lifecycle;
+
+import dev.oreo.modulith.core.PluginModule;
+import fr.elias.oreoEssentials.platform.modularity.ManagedModule;
+import fr.elias.oreoEssentials.configuration.lifecycle.ConfigurationServices;
+import fr.elias.oreoEssentials.economy.lifecycle.EconomyServices;
+import fr.elias.oreoEssentials.storage.lifecycle.StorageServices;
+
+@PluginModule(value = "discord-integration", dependencies = {"configuration::services", "economy::services", "mute-system", "storage::services"})
+public final class DiscordIntegrationModule extends ManagedModule implements DiscordIntegrationServices {
+    private fr.elias.oreoEssentials.integrations.internal.integration.DiscordModerationNotifier discordMod;
+    private fr.elias.oreoEssentials.discord.internal.discordbot.DiscordLinkManager discordLinkManager;
+
+    @Override
+    protected void start() {
+        initDiscordIntegration();
+    }
+
+    @Override public fr.elias.oreoEssentials.integrations.internal.integration.DiscordModerationNotifier getDiscordMod() { return discordMod; }
+    @Override public fr.elias.oreoEssentials.discord.internal.discordbot.DiscordLinkManager getDiscordLinkManager() { return discordLinkManager; }
+
+    private void initDiscordIntegration() {
+        if (services(ConfigurationServices.class).getSettingsConfig().discordModerationEnabled()) {
+            this.discordMod = new fr.elias.oreoEssentials.integrations.internal.integration.DiscordModerationNotifier(plugin);
+            plugin.getLogger().info("[DiscordMod] Discord moderation integration enabled.");
+        } else {
+            this.discordMod = null;
+            plugin.getLogger().info("[DiscordMod] Disabled by settings.yml.");
+        }
+
+        String linkBackend = plugin.getConfig().getString("discord.link_backend", "file").toLowerCase();
+
+        if ("mongodb".equals(linkBackend) && services(StorageServices.class).getHomesMongoClient() != null) {
+            String dbName = plugin.getConfig().getString("storage.mongo.database", "oreo");
+            com.mongodb.client.MongoDatabase linkDb = services(StorageServices.class).getHomesMongoClient().getDatabase(dbName);
+            this.discordLinkManager = new fr.elias.oreoEssentials.discord.internal.discordbot.DiscordLinkManager(linkDb, plugin.getLogger());
+            plugin.getLogger().info("[DiscordLink] Account linking: mongodb backend.");
+        } else {
+            this.discordLinkManager = new fr.elias.oreoEssentials.discord.internal.discordbot.DiscordLinkManager(plugin.getDataFolder(), plugin.getLogger());
+            if ("mongodb".equals(linkBackend)) {
+                plugin.getLogger().warning("[DiscordLink] link_backend=mongodb but MongoDB is not connected; falling back to file.");
+            } else {
+                plugin.getLogger().info("[DiscordLink] Account linking: file backend.");
+            }
+        }
+
+        var linkCmd = new fr.elias.oreoEssentials.discord.internal.discordbot.DiscordLinkCommand(discordLinkManager);
+        services(ConfigurationServices.class).getCommands().registerLegacy("discord", linkCmd, linkCmd);
+        services(ConfigurationServices.class).getCommands().registerLegacy("oe-discord",
+                new fr.elias.oreoEssentials.discord.internal.discordbot.DiscordRconExtension(services(StorageServices.class).getHomeService(), services(EconomyServices.class).getDatabase()));
+    }
+}

@@ -1,0 +1,13 @@
+/**
+ * clear-lag feature: lifecycle wiring and the implementation it owns.
+ *
+ * <p>{@code lifecycle} exposes the MinecraftModulith service contract and startup
+ * entry point. {@code internal} contains gameplay, commands, listeners and persistence
+ * belonging to this feature. Existing cross-feature implementation references are
+ * tracked separately from lifecycle dependencies; these packages are not hot-unloadable.
+ *
+ * @see fr.elias.oreoEssentials.clearlag.lifecycle.ClearLagModule
+ */
+@fr.elias.oreoEssentials.platform.modularity.FeaturePackage(
+        id = "clear-lag", lifecycle = fr.elias.oreoEssentials.clearlag.lifecycle.ClearLagModule.class)
+package fr.elias.oreoEssentials.clearlag;
