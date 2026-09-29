@@ -6,23 +6,40 @@ and shutdown into 56 MinecraftModulith modules. The Bukkit entry point retains t
 
 ## Dependency and build
 
-MinecraftModulith is pinned to [`v0.2.1`](https://github.com/el211/MinecraftModulith/tree/v0.2.1)
+The project builds with **Gradle** (Kotlin DSL) via the Gradle wrapper — Maven is no
+longer used. MinecraftModulith is pinned to [`v0.2.1`](https://github.com/el211/MinecraftModulith/tree/v0.2.1)
 from JitPack:
 
-```xml
-<groupId>com.github.el211.MinecraftModulith</groupId>
-<artifactId>modulith-paper</artifactId>
-<version>v0.2.1</version>
+```kotlin
+implementation("com.github.el211.MinecraftModulith:modulith-paper:v0.2.1")
+annotationProcessor("com.github.el211.MinecraftModulith:modulith-processor:v0.2.1")
+testImplementation("com.github.el211.MinecraftModulith:modulith-test:v0.2.1")
 ```
 
 `modulith-processor` validates the new module boundaries during compilation;
-`modulith-test` supplies the lifecycle test harness. The runtime and ClassGraph are
-shaded and relocated into the plugin JAR. No separate MinecraftModulith server plugin
-is required. The project targets Java 21.
+`modulith-test` supplies the lifecycle test harness. The MinecraftModulith runtime,
+ClassGraph, CommandsAPI, Libby and bStats are shaded and relocated into the plugin JAR
+by the Shadow plugin. No separate MinecraftModulith server plugin is required.
 
-Build with `mvn clean package`. On the workspace's JDK 25, the existing Mockito/
-Byte Buddy versions need `mvn -DargLine=-Dnet.bytebuddy.experimental=true clean package`.
-The development artifact is `target/OreoEssentials-6.9-SNAPSHOT.jar`.
+The plugin targets **Java 21** bytecode. Because a provided dependency
+(worldedit-bukkit 7.4.4, via the FastAsyncWorldEdit BOM) ships Java 25 bytecode, the
+Gradle toolchain compiles on **JDK 25** with `--release 21`; the tests run on JDK 25
+with `-Dnet.bytebuddy.experimental=true` for Mockito. Gradle auto-provisions the
+toolchain if needed.
+
+Build with:
+
+```bash
+./gradlew clean build      # compile, test, and produce the shaded jar
+./gradlew shadowJar        # just the plugin jar
+```
+
+The distributable artifact is `build/libs/OreoEssentials-6.9-SNAPSHOT.jar` (the
+`-plain.jar` beside it is the unshaded classes and is not used for deployment).
+
+> Note: `build.gradle.kts` lists `mavenLocal()` first so the build still succeeds when
+> a remote plugin repository is briefly unreachable (e.g. `maven.devs.beer` returning
+> HTTP 522) and the artifacts are already in the local Maven cache.
 
 ## Layout
 
