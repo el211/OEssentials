@@ -82,47 +82,47 @@ OEssentials is a modern Essentials replacement for single and multi-server Paper
 
 OEssentials is designed to work across Velocity/BungeeCord + multiple Paper servers.
 
-### Database (`database.yml`)
+All cross-server settings live in the main **`config.yml`** — there is no separate
+`database.yml` or `rabbitmq.yml`.
+
+### Storage backend (`config.yml`)
+
+Set the primary store to `mongodb` to enable shared/cross-server home & warp ownership:
 
 ```yaml
-mongo:
-  enabled: true
-  host: "127.0.0.1"
-  port: 27017
-  database: "oessentials"
-  username: ""
-  password: ""
+# Primary essentials data store (homes/warps/spawn/back)
+essentials:
+  storage: "mongodb"   # yaml | json | mongodb  (mongodb = cross-server)
 
+storage:
+  mongo:
+    uri: "mongodb://localhost:27017"
+    database: "oreo"
+    collectionPrefix: "oreo_"
+```
+
+### Redis cache (`config.yml`, optional)
+
+```yaml
 redis:
   enabled: true
-  host: "127.0.0.1"
+  host: "localhost"
   port: 6379
   password: ""
+  cache-expiry: 600   # TTL in seconds
 ```
 
-### RabbitMQ (`rabbitmq.yml`)
+### Cross-server messaging (`config.yml`)
 
 ```yaml
-enabled: true
-host: "127.0.0.1"
-port: 5672
-username: "guest"
-password: "guest"
-virtual-host: "/"
-prefix: "oreo"
-```
+network:
+  cross-server: true
+  transport: "plugin_message"   # server switching via proxy plugin messaging
 
-### Feature Toggles (`settings.yml`)
-
-```yaml
-features:
-  cross-server:
-    homes: true
-    warps: true
-    spawn: true
-    economy: true
-    enderchest: true
-    inventory-sync: true
+# RabbitMQ — powers chat sync and home-teleport coordination
+rabbitmq:
+  enabled: true
+  uri: "amqps://user:pass@host/vhost"
 ```
 
 ---
