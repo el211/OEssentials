@@ -26,14 +26,14 @@ public class RulesCommand implements OreoCommand, TabCompleter {
 
     public RulesCommand(Plugin plugin) {
         this.plugin     = plugin;
-        this.configFile = new File(plugin.getDataFolder(), "server/rules.yml");
+        this.configFile = new File(plugin.getDataFolder(), "config/server/rules.yml");
         load();
     }
 
     public void load() {
         if (!configFile.exists()) {
             configFile.getParentFile().mkdirs();
-            plugin.saveResource("server/rules.yml", false);
+            plugin.saveResource("config/server/rules.yml", false);
         }
         FileConfiguration cfg = YamlConfiguration.loadConfiguration(configFile);
         lines = cfg.getStringList("rules.lines");

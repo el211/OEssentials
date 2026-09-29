@@ -38,7 +38,7 @@ public final class YamlMailRepository implements MailRepository {
 
     public YamlMailRepository(Plugin plugin) {
         this.plugin = plugin;
-        this.file   = new File(plugin.getDataFolder(), "mail.yml");
+        this.file   = new File(plugin.getDataFolder(), "data/mail.yml");
         if (!file.exists()) {
             try { plugin.getDataFolder().mkdirs(); file.createNewFile(); }
             catch (IOException e) { plugin.getLogger().severe("[Mail] Cannot create mail.yml: " + e.getMessage()); }

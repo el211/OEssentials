@@ -17,7 +17,7 @@ public class YamlEnderChestStorage implements EnderChestStorage {
 
     public YamlEnderChestStorage(OEssentials plugin) {
         this.log  = plugin.getLogger();
-        this.file = new File(plugin.getDataFolder(), "enderchests.yml");
+        this.file = new File(plugin.getDataFolder(), "data/enderchests.yml");
         if (!file.exists()) {
             try { file.createNewFile(); } catch (Exception ignored) {}
         }

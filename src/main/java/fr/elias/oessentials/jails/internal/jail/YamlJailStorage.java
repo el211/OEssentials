@@ -15,7 +15,7 @@ public final class YamlJailStorage implements JailStorage {
 
     public YamlJailStorage(Plugin plugin) {
         this.plugin = plugin;
-        this.file = new File(plugin.getDataFolder(), "jails.yml");
+        this.file = new File(plugin.getDataFolder(), "data/jails.yml");
     }
 
     private void ensureLoaded() {

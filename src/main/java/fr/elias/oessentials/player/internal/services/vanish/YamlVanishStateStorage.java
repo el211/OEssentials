@@ -12,7 +12,7 @@ public final class YamlVanishStateStorage implements VanishStateStorage {
     private final YamlConfiguration cfg;
 
     public YamlVanishStateStorage(JavaPlugin plugin) {
-        this.file = new File(plugin.getDataFolder(), "vanish-state.yml");
+        this.file = new File(plugin.getDataFolder(), "data/vanish-state.yml");
         if (!plugin.getDataFolder().exists()) {
             plugin.getDataFolder().mkdirs();
         }

@@ -178,7 +178,7 @@ public class OeSettingsMenu implements InventoryProvider {
         settings.getRoot().set("features." + featureKey + ".enabled", !current);
 
         try {
-            settings.getRoot().save(new java.io.File(plugin.getDataFolder(), "settings.yml"));
+            settings.getRoot().save(new java.io.File(plugin.getDataFolder(), "config/settings.yml"));
             plugin.getLogger().info("[Settings] Toggled " + featureKey + ": " + !current);
         } catch (Exception ex) {
             plugin.getLogger().severe("[Settings] Failed to save: " + ex.getMessage());

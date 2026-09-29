@@ -26,9 +26,9 @@ public class SettingsConfig {
             plugin.getDataFolder().mkdirs();
         }
 
-        file = new File(plugin.getDataFolder(), "settings.yml");
+        file = new File(plugin.getDataFolder(), "config/settings.yml");
         if (!file.exists()) {
-            plugin.saveResource("settings.yml", false);
+            plugin.saveResource("config/settings.yml", false);
         }
 
         cfg = YamlConfiguration.loadConfiguration(file);

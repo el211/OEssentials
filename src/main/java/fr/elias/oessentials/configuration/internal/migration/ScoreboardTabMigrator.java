@@ -31,7 +31,7 @@ public final class ScoreboardTabMigrator {
     private ScoreboardTabMigrator() {}
 
     public static void migrate(OEssentials plugin) {
-        File folder = new File(plugin.getDataFolder(), "scoreboard-tab");
+        File folder = new File(plugin.getDataFolder(), "config/scoreboard-tab");
         if (!folder.exists()) folder.mkdirs();
 
         migrateScoreboard(plugin, folder);
@@ -62,7 +62,7 @@ public final class ScoreboardTabMigrator {
             }
         } else {
             // No existing config — extract the bundled default
-            plugin.saveResource("scoreboard-tab/scoreboard.yml", false);
+            plugin.saveResource("config/scoreboard-tab/scoreboard.yml", false);
             plugin.getLogger().info("[Migration] Created default scoreboard-tab/scoreboard.yml");
         }
     }
@@ -83,7 +83,7 @@ public final class ScoreboardTabMigrator {
                 plugin.getLogger().warning("[Migration] Could not migrate tab.yml: " + e.getMessage());
             }
         } else {
-            plugin.saveResource("scoreboard-tab/tab.yml", false);
+            plugin.saveResource("config/scoreboard-tab/tab.yml", false);
             plugin.getLogger().info("[Migration] Created default scoreboard-tab/tab.yml");
         }
     }

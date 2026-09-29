@@ -38,7 +38,7 @@ public class PunishmentLogger {
 
     public PunishmentLogger(Plugin plugin) {
         this.plugin = plugin;
-        this.file   = new File(plugin.getDataFolder(), "punishment_history.yml");
+        this.file   = new File(plugin.getDataFolder(), "data/punishment_history.yml");
         if (!file.exists()) {
             try { plugin.getDataFolder().mkdirs(); file.createNewFile(); }
             catch (IOException e) { plugin.getLogger().severe("[History] Cannot create file: " + e.getMessage()); }

@@ -40,7 +40,7 @@ public final class PortalConfig {
     private List<String> wandLore;
 
     public PortalConfig(File pluginDataFolder) {
-        this.folder = new File(pluginDataFolder, "portals");
+        this.folder = new File(pluginDataFolder, "data/portals");
         if (!folder.exists()) folder.mkdirs();
 
         saveDefault("config.yml");

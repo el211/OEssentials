@@ -40,10 +40,10 @@ public final class PlayerVaultsConfig {
     private final Map<Integer, Map<String, Integer>> slotsPerVault;
 
     public PlayerVaultsConfig(OEssentials plugin) {
-        File file = new File(plugin.getDataFolder(), "playervaults/config.yml");
+        File file = new File(plugin.getDataFolder(), "data/playervaults/config.yml");
         if (!file.exists()) {
             file.getParentFile().mkdirs();
-            plugin.saveResource("playervaults/config.yml", false);
+            plugin.saveResource("data/playervaults/config.yml", false);
         }
         org.bukkit.configuration.file.FileConfiguration yaml = YamlConfiguration.loadConfiguration(file);
         ConfigurationSection cs = yaml.getConfigurationSection("playervaults");

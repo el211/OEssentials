@@ -129,9 +129,62 @@ public final class OEssentials extends JavaPlugin {
     @Override
     public void onLoad() { loadExternalLibraries(); }
 
+    // Editable configuration lives under config/, plugin-written state under data/.
+    private static final String[] CONFIG_ENTRIES = {
+            "settings.yml", "kits.yml", "rtp.yml", "sellgui.yml", "group-rtp.yml",
+            "discord-integration.yml", "featureFlags.yml", "currency-config.yml", "events.yml",
+            "jumpads.yml", "player-sync.yml", "recipes.yml", "worlds.yml", "lang.yml",
+            "afk", "auctionhouse", "chat-messaging", "commandsmodule", "custom-currencies",
+            "custom-nameplates", "dailyrewards", "lang", "oreopanel", "playtime-rewards",
+            "scoreboard-tab", "server", "shop"
+    };
+    private static final String[] DATA_ENTRIES = {
+            "balances.json", "balances.yml", "channel-data.yml", "currencies.json",
+            "currency_balances.json", "daily_players.yml", "economy_last_type.yml", "economy.json",
+            "essentials.json", "enderchests.yml", "ignore.yml", "ips.yml", "jails.yml",
+            "kitsdata.yml", "mail.yml", "mutes.yml", "notes.yml", "playerwarps.yml",
+            "playtime_data.yml", "punishment_history.yml", "warnings.yml", "vanish-state.yml",
+            "player-sync-prefs.yml", "prewards_data.yml",
+            "enderchests", "orders", "playervaults", "playerwarps", "portals", "trades",
+            "vaults", "OHolograms", "players"
+    };
+
+    /**
+     * Groups the data folder into config/ and data/. Creates the folder skeleton and, for
+     * servers upgrading from the flat layout, moves any existing root-level file or folder
+     * into its new home. Runs before modules load so all file paths resolve correctly.
+     */
+    private void reorganizeDataFolder() {
+        java.io.File root = getDataFolder();
+        if (!root.exists() && !root.mkdirs()) return;
+        migrateInto(root, new java.io.File(root, "config"), CONFIG_ENTRIES);
+        migrateInto(root, new java.io.File(root, "data"), DATA_ENTRIES);
+    }
+
+    private void migrateInto(java.io.File root, java.io.File target, String[] names) {
+        target.mkdirs();
+        for (String name : names) {
+            java.io.File src = new java.io.File(root, name);
+            java.io.File dest = new java.io.File(target, name);
+            if (src.exists() && !dest.exists()) {
+                java.io.File parent = dest.getParentFile();
+                if (parent != null) parent.mkdirs();
+                try {
+                    java.nio.file.Files.move(src.toPath(), dest.toPath());
+                    getLogger().info("[data-layout] moved " + name + " -> " + target.getName() + "/" + name);
+                } catch (java.io.IOException e) {
+                    getLogger().warning("[data-layout] could not move " + name + ": " + e.getMessage());
+                }
+            }
+            // Ensure sub-folders exist on fresh installs so writes never fail.
+            if (!name.contains(".")) dest.mkdirs();
+        }
+    }
+
     @Override
     public void onEnable() {
         instance = this;
+        reorganizeDataFolder();
         try {
             modulith = OreoModules.start(this);
             getLogger().info("OEssentials enabled with " + modulith.runtime().modules().size() + " modules.");

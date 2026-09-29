@@ -21,7 +21,7 @@ public class YamlChannelPersistence implements ChannelPersistenceProvider {
 
     public YamlChannelPersistence(OEssentials plugin) {
         this.plugin = plugin;
-        this.dataFile = new File(plugin.getDataFolder(), "channel-data.yml");
+        this.dataFile = new File(plugin.getDataFolder(), "data/channel-data.yml");
 
         if (!dataFile.exists()) {
             try {

@@ -29,7 +29,7 @@ public class CommandToggleConfig {
 
     public CommandToggleConfig(JavaPlugin plugin) {
         this.plugin = Objects.requireNonNull(plugin, "plugin");
-        this.configFile = new File(plugin.getDataFolder(), "commandsmodule/commands-toggle.yml");
+        this.configFile = new File(plugin.getDataFolder(), "config/commandsmodule/commands-toggle.yml");
         load();
     }
 
@@ -37,7 +37,7 @@ public class CommandToggleConfig {
         if (!configFile.exists()) {
             File parent = configFile.getParentFile();
             if (parent != null) parent.mkdirs();
-            plugin.saveResource("commandsmodule/commands-toggle.yml", false);
+            plugin.saveResource("config/commandsmodule/commands-toggle.yml", false);
         }
 
         this.config = YamlConfiguration.loadConfiguration(configFile);

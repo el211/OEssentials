@@ -30,7 +30,7 @@ public class HelpConfig {
 
     public HelpConfig(OEssentials plugin) {
         this.plugin     = plugin;
-        this.configFile = new File(plugin.getDataFolder(), "server/help.yml");
+        this.configFile = new File(plugin.getDataFolder(), "config/server/help.yml");
         load();
     }
 
@@ -39,7 +39,7 @@ public class HelpConfig {
     public void load() {
         if (!configFile.exists()) {
             configFile.getParentFile().mkdirs();
-            plugin.saveResource("server/help.yml", false);
+            plugin.saveResource("config/server/help.yml", false);
         }
         cfg = YamlConfiguration.loadConfiguration(configFile);
         parse();

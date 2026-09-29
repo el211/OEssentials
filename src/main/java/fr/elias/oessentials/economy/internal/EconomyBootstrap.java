@@ -23,7 +23,7 @@ public class EconomyBootstrap {
 
     public EconomyBootstrap(OEssentials plugin) {
         this.plugin = plugin;
-        this.migrationFile = new File(plugin.getDataFolder(), "economy_last_type.yml");
+        this.migrationFile = new File(plugin.getDataFolder(), "data/economy_last_type.yml");
     }
 
     public void enable() {
@@ -143,8 +143,8 @@ public class EconomyBootstrap {
     }
 
     private void checkForOrphanedData(String currentType) {
-        File yamlFile = new File(plugin.getDataFolder(), "balances.yml");
-        File jsonFile = new File(plugin.getDataFolder(), "balances.json");
+        File yamlFile = new File(plugin.getDataFolder(), "data/balances.yml");
+        File jsonFile = new File(plugin.getDataFolder(), "data/balances.json");
 
         boolean hasYaml = yamlFile.exists() && yamlFile.length() > 100; // At least some data
         boolean hasJson = jsonFile.exists() && jsonFile.length() > 100;
@@ -152,10 +152,10 @@ public class EconomyBootstrap {
         List<String> orphanedFiles = new ArrayList<>();
 
         if (hasYaml && !currentType.equals("yaml")) {
-            orphanedFiles.add("balances.yml");
+            orphanedFiles.add("data/balances.yml");
         }
         if (hasJson && !currentType.equals("json")) {
-            orphanedFiles.add("balances.json");
+            orphanedFiles.add("data/balances.json");
         }
 
         if (!orphanedFiles.isEmpty()) {

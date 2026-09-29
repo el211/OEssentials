@@ -25,7 +25,7 @@ public class DiscordModerationNotifier {
 
     public DiscordModerationNotifier(Plugin plugin) {
         this.plugin = plugin;
-        this.cfg = new CustomConfig(OEssentials.get(), "discord-integration.yml");
+        this.cfg = new CustomConfig(OEssentials.get(), "config/discord-integration.yml");
         reload();
     }
 

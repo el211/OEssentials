@@ -44,10 +44,10 @@ public class ClearLagManager {
     }
 
     public void reload() {
-        File file = new File(plugin.getDataFolder(), "server/clearlag.yml");
+        File file = new File(plugin.getDataFolder(), "config/server/clearlag.yml");
         if (!file.exists()) {
             file.getParentFile().mkdirs();
-            plugin.saveResource("server/clearlag.yml", false);
+            plugin.saveResource("config/server/clearlag.yml", false);
         }
         FileConfiguration root = YamlConfiguration.loadConfiguration(file);
         this.cfg = new ClearLagConfig(root);

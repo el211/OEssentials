@@ -13,7 +13,7 @@ public final class ICManager {
     private final Map<String, ICEntry> map = new LinkedHashMap<>();
 
     public ICManager(File dataFolder) {
-        this.file = new File(dataFolder, "commandsmodule/interactive-commands.yml");
+        this.file = new File(dataFolder, "config/commandsmodule/interactive-commands.yml");
         file.getParentFile().mkdirs();
         if (!file.exists()) {
             try {

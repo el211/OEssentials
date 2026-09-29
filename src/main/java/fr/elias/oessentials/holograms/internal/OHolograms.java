@@ -486,7 +486,7 @@ public final class OHolograms implements OHologramsPlugin {
     }
 
     public File getDataFolder() {
-        File dir = new File(plugin.getDataFolder(), "OHolograms");
+        File dir = new File(plugin.getDataFolder(), "data/OHolograms");
         if (!dir.exists()) {
             dir.mkdirs();
         }

@@ -50,11 +50,11 @@ public final class AliasService {
     public AliasService(JavaPlugin plugin) {
         this.plugin = plugin;
         this.logger = plugin.getLogger();
-        this.file   = new File(plugin.getDataFolder(), "commandsmodule/aliases.yml");
+        this.file   = new File(plugin.getDataFolder(), "config/commandsmodule/aliases.yml");
         this.defaultResourceExtractor = () -> {
             try {
                 file.getParentFile().mkdirs();
-                plugin.saveResource("commandsmodule/aliases.yml", false);
+                plugin.saveResource("config/commandsmodule/aliases.yml", false);
             } catch (Exception e) {
                 logger.warning("[Aliases] Could not extract default aliases.yml: " + e.getMessage());
             }
@@ -68,7 +68,7 @@ public final class AliasService {
     AliasService(Logger logger, File dataFolder) {
         this.plugin                   = null;
         this.logger                   = Objects.requireNonNull(logger, "logger");
-        this.file                     = new File(dataFolder, "commandsmodule/aliases.yml");
+        this.file                     = new File(dataFolder, "config/commandsmodule/aliases.yml");
         this.defaultResourceExtractor = () -> {}; // no-op — tests supply their own files
     }
 

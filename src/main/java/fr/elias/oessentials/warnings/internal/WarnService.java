@@ -42,9 +42,9 @@ public class WarnService {
         this.plugin = plugin;
 
         // Save default config
-        plugin.saveResource("server/warnings.yml", false);
+        plugin.saveResource("config/server/warnings.yml", false);
         FileConfiguration warnConfig = YamlConfiguration.loadConfiguration(
-                new File(plugin.getDataFolder(), "server/warnings.yml"));
+                new File(plugin.getDataFolder(), "config/server/warnings.yml"));
 
         maxWarnings       = warnConfig.getInt("warnings.max-warnings", 3);
         maxAction         = warnConfig.getString("warnings.max-action", "tempban").toLowerCase(Locale.ROOT);
@@ -54,7 +54,7 @@ public class WarnService {
         expireAfterMs     = (expStr == null || expStr.isBlank()) ? -1 : parseDuration(expStr);
 
         // Load persistent warn data
-        this.file = new File(plugin.getDataFolder(), "warnings.yml");
+        this.file = new File(plugin.getDataFolder(), "data/warnings.yml");
         if (!file.exists()) {
             try { plugin.getDataFolder().mkdirs(); file.createNewFile(); }
             catch (IOException e) { plugin.getLogger().severe("[Warn] Cannot create warnings.yml: " + e.getMessage()); }

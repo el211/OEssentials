@@ -27,8 +27,8 @@ public final class MaintenanceModule extends ManagedModule implements Maintenanc
             return;
         }
         try {
-            File maintenanceFile = new File(plugin.getDataFolder(), "server/maintenance.yml");
-            if (!maintenanceFile.exists()) { maintenanceFile.getParentFile().mkdirs(); plugin.saveResource("server/maintenance.yml", false); }
+            File maintenanceFile = new File(plugin.getDataFolder(), "config/server/maintenance.yml");
+            if (!maintenanceFile.exists()) { maintenanceFile.getParentFile().mkdirs(); plugin.saveResource("config/server/maintenance.yml", false); }
 
             this.maintenanceConfig  = new fr.elias.oessentials.maintenance.internal.MaintenanceConfig(plugin);
             this.maintenanceService = new fr.elias.oessentials.maintenance.internal.MaintenanceService(plugin, maintenanceConfig);

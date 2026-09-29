@@ -12,9 +12,9 @@ public final class EventConfig {
     private Map<EventType, List<String>> map = new EnumMap<>(EventType.class);
 
     public EventConfig(File dataFolder) {
-        File folder = new File(dataFolder, "chat-messaging");
+        File folder = new File(dataFolder, "config/chat-messaging");
         if (!folder.exists()) folder.mkdirs();
-        this.file = new File(folder, "events.yml");
+        this.file = new File(folder, "config/events.yml");
         if (!file.exists()) saveDefault();
         reload();
     }

@@ -39,7 +39,7 @@ public final class ChatMessagingMigrator {
     private ChatMessagingMigrator() {}
 
     public static void migrate(OEssentials plugin) {
-        File folder = new File(plugin.getDataFolder(), "chat-messaging");
+        File folder = new File(plugin.getDataFolder(), "config/chat-messaging");
         if (!folder.exists()) folder.mkdirs();
 
         migrateChatFormat(plugin, folder);
@@ -63,7 +63,7 @@ public final class ChatMessagingMigrator {
                 plugin.getLogger().warning("[Migration] Could not migrate chat-format.yml: " + e.getMessage());
             }
         } else {
-            plugin.saveResource("chat-messaging/chat-format.yml", false);
+            plugin.saveResource("config/chat-messaging/chat-format.yml", false);
             plugin.getLogger().info("[Migration] Created default chat-messaging/chat-format.yml");
         }
     }
@@ -84,7 +84,7 @@ public final class ChatMessagingMigrator {
                 plugin.getLogger().warning("[Migration] Could not migrate death-messages.yml: " + e.getMessage());
             }
         } else {
-            plugin.saveResource("chat-messaging/death-messages.yml", false);
+            plugin.saveResource("config/chat-messaging/death-messages.yml", false);
             plugin.getLogger().info("[Migration] Created default chat-messaging/death-messages.yml");
         }
     }
@@ -121,7 +121,7 @@ public final class ChatMessagingMigrator {
                 plugin.getLogger().warning("[Migration] Could not save join-quit-messages.yml: " + e.getMessage());
             }
         } else {
-            plugin.saveResource("chat-messaging/join-quit-messages.yml", false);
+            plugin.saveResource("config/chat-messaging/join-quit-messages.yml", false);
             plugin.getLogger().info("[Migration] Created default chat-messaging/join-quit-messages.yml");
         }
     }

@@ -123,7 +123,7 @@ public final class ChatModule extends ManagedModule implements ChatServices {
 
     private org.bukkit.configuration.file.FileConfiguration loadJoinQuitConfig() {
         java.io.File f = new java.io.File(plugin.getDataFolder(), "chat-messaging/join-quit-messages.yml");
-        if (!f.exists()) plugin.saveResource("chat-messaging/join-quit-messages.yml", false);
+        if (!f.exists()) plugin.saveResource("config/chat-messaging/join-quit-messages.yml", false);
         return org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(f);
     }
 

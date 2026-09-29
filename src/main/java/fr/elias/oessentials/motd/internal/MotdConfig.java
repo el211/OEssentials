@@ -26,14 +26,14 @@ public class MotdConfig {
 
     public MotdConfig(Plugin plugin) {
         this.plugin = plugin;
-        this.file   = new File(plugin.getDataFolder(), "server/motd.yml");
+        this.file   = new File(plugin.getDataFolder(), "config/server/motd.yml");
         load();
     }
 
     public void load() {
         if (!file.exists()) {
             file.getParentFile().mkdirs();
-            plugin.saveResource("server/motd.yml", false);
+            plugin.saveResource("config/server/motd.yml", false);
         }
         FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 

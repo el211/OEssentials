@@ -17,7 +17,7 @@ public final class RecipesStorage {
     private final FileConfiguration cfg;
 
     public RecipesStorage(Plugin plugin) {
-        this.file = new File(plugin.getDataFolder(), "recipes.yml");
+        this.file = new File(plugin.getDataFolder(), "config/recipes.yml");
         this.cfg = YamlConfiguration.loadConfiguration(file);
     }
 

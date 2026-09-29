@@ -23,7 +23,7 @@ public class JsonStorage implements StorageApi {
     private Data data;
 
     public JsonStorage(Plugin plugin) {
-        this.file = new File(plugin.getDataFolder(), "essentials.json");
+        this.file = new File(plugin.getDataFolder(), "data/essentials.json");
         load();
     }
 

@@ -57,8 +57,8 @@ public final class ScoreboardConfig {
     }
 
     public static ScoreboardConfig load(OEssentials plugin) {
-        File file = new File(plugin.getDataFolder(), "scoreboard-tab/scoreboard.yml");
-        if (!file.exists()) plugin.saveResource("scoreboard-tab/scoreboard.yml", false);
+        File file = new File(plugin.getDataFolder(), "config/scoreboard-tab/scoreboard.yml");
+        if (!file.exists()) plugin.saveResource("config/scoreboard-tab/scoreboard.yml", false);
         ConfigurationSection root = YamlConfiguration.loadConfiguration(file).getConfigurationSection("scoreboard");
 
         // You already control the "enabled" toggle via SettingsConfig, so always respect that:

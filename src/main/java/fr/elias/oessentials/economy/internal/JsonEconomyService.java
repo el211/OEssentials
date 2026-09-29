@@ -20,7 +20,7 @@ public class JsonEconomyService implements EconomyService {
 
     public JsonEconomyService(Plugin plugin) {
         this.plugin = plugin;
-        this.file = new File(plugin.getDataFolder(), "balances.json");
+        this.file = new File(plugin.getDataFolder(), "data/balances.json");
         this.gson = new GsonBuilder().setPrettyPrinting().create();
         this.balances = new HashMap<>();
         load();

@@ -31,7 +31,7 @@ public final class PlaytimeTracker implements Listener {
 
     public PlaytimeTracker(OEssentials plugin) {
         this.plugin = plugin;
-        this.file = new File(plugin.getDataFolder(), "playtime_data.yml");
+        this.file = new File(plugin.getDataFolder(), "data/playtime_data.yml");
         load();
         Bukkit.getPluginManager().registerEvents(this, plugin);
         autosaveTask = OreScheduler.runTimer(plugin, this::saveQuietAsync, 20L * 60, 20L * 60);

@@ -54,7 +54,7 @@ public class RegisterRewardService implements Listener {
     // ── Persistence ───────────────────────────────────────────────────────────
 
     private void loadClaimed() {
-        File folder = new File(plugin.getDataFolder(), "oreopanel");
+        File folder = new File(plugin.getDataFolder(), "config/oreopanel");
         folder.mkdirs();
         claimFile = new File(folder, "reward_claimed.yml");
         if (!claimFile.exists()) return;

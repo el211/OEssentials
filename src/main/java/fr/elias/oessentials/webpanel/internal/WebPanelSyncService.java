@@ -1005,9 +1005,9 @@ public class WebPanelSyncService implements Listener {
     private String resolveConfigPath(String canonicalName) {
         return switch (canonicalName) {
             case "config.yml"             -> "config.yml";
-            case "settings.yml"           -> "settings.yml";
-            case "rtp.yml"                -> "rtp.yml";
-            case "playerwarps.yml"        -> "playerwarps/config.yml";
+            case "config/settings.yml"           -> "config/settings.yml";
+            case "config/rtp.yml"                -> "config/rtp.yml";
+            case "data/playerwarps.yml"        -> "playerwarps/config.yml";
             case "scoreboard.yml"         -> "scoreboard-tab/scoreboard.yml";
             case "tab.yml"                -> "scoreboard-tab/tab.yml";
             case "dailyrewards.yml"       -> "dailyrewards/dailyrewards.yml";
@@ -1029,7 +1029,7 @@ public class WebPanelSyncService implements Listener {
     private void reloadConfigByName(String canonicalName) {
         switch (canonicalName) {
             case "config.yml"             -> plugin.reloadConfig();
-            case "settings.yml"           -> plugin.getSettingsConfig().reload();
+            case "config/settings.yml"           -> plugin.getSettingsConfig().reload();
             case "scoreboard.yml"         -> plugin.getScoreboardService().reload();
             case "tab.yml"                -> plugin.getTabListManager().reload();
             case "dailyrewards.yml"       -> {
@@ -1041,10 +1041,10 @@ public class WebPanelSyncService implements Listener {
             case "clearlag.yml"           -> plugin.getClearLagManager().reload();
             case "craft-actions.yml"      -> plugin.getCraftActionsConfig().reload();
             case "playervaults.yml"       -> plugin.getPlayerVaultsService().reload();
-            case "playerwarps.yml"        -> plugin.reloadPlayerWarpsConfig();
+            case "data/playerwarps.yml"        -> plugin.reloadPlayerWarpsConfig();
             case "chat-format.yml",
                  "join-quit-messages.yml" -> plugin.reloadChat();
-            case "rtp.yml"                -> plugin.getRtpConfig().reload();
+            case "config/rtp.yml"                -> plugin.getRtpConfig().reload();
         }
     }
 

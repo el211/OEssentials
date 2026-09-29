@@ -51,13 +51,13 @@ public final class FeatureConfigMigrator {
     // ── Player Warps ──────────────────────────────────────────────────────────
 
     private static void migratePlayerWarps(OEssentials plugin) {
-        File folder = new File(plugin.getDataFolder(), "playerwarps");
+        File folder = new File(plugin.getDataFolder(), "data/playerwarps");
         if (!folder.exists()) folder.mkdirs();
 
         File dest = new File(folder, "config.yml");
         if (dest.exists()) return;
 
-        File old = new File(plugin.getDataFolder(), "playerwarps.yml");
+        File old = new File(plugin.getDataFolder(), "data/playerwarps.yml");
         if (old.exists() && old.length() > 2) {
             // Old file had real content — move it
             try {
@@ -70,7 +70,7 @@ public final class FeatureConfigMigrator {
         } else {
             // Old file was empty or missing — extract default
             if (old.exists()) old.delete();
-            plugin.saveResource("playerwarps/config.yml", false);
+            plugin.saveResource("data/playerwarps/config.yml", false);
             plugin.getLogger().info("[Migration] Created default playerwarps/config.yml");
         }
     }
@@ -78,7 +78,7 @@ public final class FeatureConfigMigrator {
     // ── Daily Rewards ─────────────────────────────────────────────────────────
 
     private static void migrateDailyRewards(OEssentials plugin) {
-        File folder = new File(plugin.getDataFolder(), "dailyrewards");
+        File folder = new File(plugin.getDataFolder(), "config/dailyrewards");
         if (!folder.exists()) folder.mkdirs();
 
         File dest = new File(folder, "dailyrewards.yml");
@@ -94,7 +94,7 @@ public final class FeatureConfigMigrator {
                 plugin.getLogger().warning("[Migration] Could not migrate dailyrewards.yml: " + e.getMessage());
             }
         } else {
-            plugin.saveResource("dailyrewards/dailyrewards.yml", false);
+            plugin.saveResource("config/dailyrewards/dailyrewards.yml", false);
             plugin.getLogger().info("[Migration] Created default dailyrewards/dailyrewards.yml");
         }
     }
@@ -102,7 +102,7 @@ public final class FeatureConfigMigrator {
     // ── Player Vaults ─────────────────────────────────────────────────────────
 
     private static void migratePlayerVaults(OEssentials plugin) {
-        File folder = new File(plugin.getDataFolder(), "playervaults");
+        File folder = new File(plugin.getDataFolder(), "data/playervaults");
         if (!folder.exists()) folder.mkdirs();
 
         File dest = new File(folder, "config.yml");
@@ -123,7 +123,7 @@ public final class FeatureConfigMigrator {
                 plugin.getLogger().warning("[Migration] Could not save playervaults/config.yml: " + e.getMessage());
             }
         } else {
-            plugin.saveResource("playervaults/config.yml", false);
+            plugin.saveResource("data/playervaults/config.yml", false);
             plugin.getLogger().info("[Migration] Created default playervaults/config.yml");
         }
     }
@@ -131,7 +131,7 @@ public final class FeatureConfigMigrator {
     // ── Playtime Rewards ──────────────────────────────────────────────────────
 
     private static void migratePlaytimeRewards(OEssentials plugin) {
-        File folder = new File(plugin.getDataFolder(), "playtime-rewards");
+        File folder = new File(plugin.getDataFolder(), "config/playtime-rewards");
         if (!folder.exists()) folder.mkdirs();
 
         File dest = new File(folder, "playtime_rewards.yml");
@@ -147,7 +147,7 @@ public final class FeatureConfigMigrator {
                 plugin.getLogger().warning("[Migration] Could not migrate playtime_rewards.yml: " + e.getMessage());
             }
         } else {
-            plugin.saveResource("playtime-rewards/playtime_rewards.yml", false);
+            plugin.saveResource("config/playtime-rewards/playtime_rewards.yml", false);
             plugin.getLogger().info("[Migration] Created default playtime-rewards/playtime_rewards.yml");
         }
     }
@@ -155,7 +155,7 @@ public final class FeatureConfigMigrator {
     // ── Server Module ─────────────────────────────────────────────────────────
 
     private static void migrateServerModule(OEssentials plugin) {
-        File folder = new File(plugin.getDataFolder(), "server");
+        File folder = new File(plugin.getDataFolder(), "config/server");
         if (!folder.exists()) folder.mkdirs();
 
         moveFile(plugin, folder, "clearlag.yml",       "server/clearlag.yml");
@@ -175,7 +175,7 @@ public final class FeatureConfigMigrator {
      *   - Else               → TempFlyConfig.createDefault() will generate it on first load
      */
     private static void migrateTempFly(OEssentials plugin) {
-        File folder = new File(plugin.getDataFolder(), "server");
+        File folder = new File(plugin.getDataFolder(), "config/server");
         if (!folder.exists()) folder.mkdirs();
 
         File dest = new File(folder, "tempfly.yml");
@@ -190,8 +190,8 @@ public final class FeatureConfigMigrator {
             } catch (IOException e) {
                 plugin.getLogger().warning("[Migration] Could not migrate tempfly.yml: " + e.getMessage());
             }
-        } else if (plugin.getResource("server/tempfly.yml") != null) {
-            plugin.saveResource("server/tempfly.yml", false);
+        } else if (plugin.getResource("config/server/tempfly.yml") != null) {
+            plugin.saveResource("config/server/tempfly.yml", false);
             plugin.getLogger().info("[Migration] Created default server/tempfly.yml");
         }
     }
@@ -207,13 +207,13 @@ public final class FeatureConfigMigrator {
      *   - Else               → JumpPadsManager will create an empty file on first load
      */
     private static void migrateJumpAds(OEssentials plugin) {
-        File folder = new File(plugin.getDataFolder(), "server");
+        File folder = new File(plugin.getDataFolder(), "config/server");
         if (!folder.exists()) folder.mkdirs();
 
-        File dest = new File(folder, "jumpads.yml");
+        File dest = new File(folder, "config/jumpads.yml");
         if (dest.exists()) return;
 
-        File old = new File(plugin.getDataFolder(), "jumpads.yml");
+        File old = new File(plugin.getDataFolder(), "config/jumpads.yml");
         if (old.exists()) {
             try {
                 Files.copy(old.toPath(), dest.toPath());
@@ -237,7 +237,7 @@ public final class FeatureConfigMigrator {
      *   - Else               → extract default from jar
      */
     private static void migrateShards(OEssentials plugin) {
-        File folder = new File(plugin.getDataFolder(), "server");
+        File folder = new File(plugin.getDataFolder(), "config/server");
         if (!folder.exists()) folder.mkdirs();
 
         File dest = new File(folder, "shards.yml");
@@ -253,8 +253,8 @@ public final class FeatureConfigMigrator {
                 plugin.getLogger().warning("[Migration] Could not migrate shards.yml: " + e.getMessage());
             }
         } else {
-            if (plugin.getResource("server/shards.yml") != null) {
-                plugin.saveResource("server/shards.yml", false);
+            if (plugin.getResource("config/server/shards.yml") != null) {
+                plugin.saveResource("config/server/shards.yml", false);
                 plugin.getLogger().info("[Migration] Created default server/shards.yml");
             }
         }
@@ -263,7 +263,7 @@ public final class FeatureConfigMigrator {
     // ── Commands Module ───────────────────────────────────────────────────────
 
     private static void migrateCommandsModule(OEssentials plugin) {
-        File folder = new File(plugin.getDataFolder(), "commandsmodule");
+        File folder = new File(plugin.getDataFolder(), "config/commandsmodule");
         if (!folder.exists()) folder.mkdirs();
 
         moveFile(plugin, folder, "command-control.yml",      "commandsmodule/command-control.yml");
@@ -311,14 +311,14 @@ public final class FeatureConfigMigrator {
      * After migration both source sections are nulled and their files re-saved.
      */
     private static void migrateAfk(OEssentials plugin) {
-        File folder = new File(plugin.getDataFolder(), "afk");
+        File folder = new File(plugin.getDataFolder(), "config/afk");
         if (!folder.exists()) folder.mkdirs();
 
         File dest = new File(folder, "config.yml");
         if (dest.exists()) return; // already migrated
 
         // Extract the bundled default first so we have a complete base to overlay onto
-        plugin.saveResource("afk/config.yml", false);
+        plugin.saveResource("config/afk/config.yml", false);
         YamlConfiguration newCfg = YamlConfiguration.loadConfiguration(dest);
 
         boolean mainChanged     = false;
@@ -355,7 +355,7 @@ public final class FeatureConfigMigrator {
         }
 
         // ── Migrate from settings.yml ─────────────────────────────────────────
-        File settingsFile = new File(plugin.getDataFolder(), "settings.yml");
+        File settingsFile = new File(plugin.getDataFolder(), "config/settings.yml");
         if (settingsFile.exists()) {
             YamlConfiguration settingsCfg = YamlConfiguration.loadConfiguration(settingsFile);
 
@@ -421,7 +421,7 @@ public final class FeatureConfigMigrator {
      *   - Else               → extract default from jar
      */
     private static void migrateTrade(OEssentials plugin) {
-        File folder = new File(plugin.getDataFolder(), "trades");
+        File folder = new File(plugin.getDataFolder(), "data/trades");
         if (!folder.exists()) folder.mkdirs();
 
         File dest = new File(folder, "trade.yml");
@@ -437,7 +437,7 @@ public final class FeatureConfigMigrator {
                 plugin.getLogger().warning("[Migration] Could not migrate trade.yml: " + e.getMessage());
             }
         } else {
-            plugin.saveResource("trades/trade.yml", false);
+            plugin.saveResource("data/trades/trade.yml", false);
             plugin.getLogger().info("[Migration] Created default trades/trade.yml");
         }
     }
@@ -452,7 +452,7 @@ public final class FeatureConfigMigrator {
      * If no old file exists the bundled default is extracted.
      */
     private static void migrateEnderChest(OEssentials plugin) {
-        File folder = new File(plugin.getDataFolder(), "enderchests");
+        File folder = new File(plugin.getDataFolder(), "data/enderchests");
         if (!folder.exists()) folder.mkdirs();
 
         File dest = new File(folder, "enderchest.yml");
@@ -493,7 +493,7 @@ public final class FeatureConfigMigrator {
                 plugin.getLogger().warning("[Migration] Could not save enderchests/enderchest.yml: " + e.getMessage());
             }
         } else {
-            plugin.saveResource("enderchests/enderchest.yml", false);
+            plugin.saveResource("data/enderchests/enderchest.yml", false);
             plugin.getLogger().info("[Migration] Created default enderchests/enderchest.yml");
         }
     }
@@ -509,13 +509,13 @@ public final class FeatureConfigMigrator {
      *   - Else               → CurrencyConfig will generate its own default on first load
      */
     private static void migrateCurrencyConfig(OEssentials plugin) {
-        File folder = new File(plugin.getDataFolder(), "custom-currencies");
+        File folder = new File(plugin.getDataFolder(), "config/custom-currencies");
         if (!folder.exists()) folder.mkdirs();
 
-        File dest = new File(folder, "currency-config.yml");
+        File dest = new File(folder, "config/currency-config.yml");
         if (dest.exists()) return;
 
-        File old = new File(plugin.getDataFolder(), "currency-config.yml");
+        File old = new File(plugin.getDataFolder(), "config/currency-config.yml");
         if (old.exists()) {
             try {
                 Files.copy(old.toPath(), dest.toPath());
@@ -539,13 +539,13 @@ public final class FeatureConfigMigrator {
      *   - Else               → EventConfig will generate its own default on first load
      */
     private static void migrateEvents(OEssentials plugin) {
-        File folder = new File(plugin.getDataFolder(), "chat-messaging");
+        File folder = new File(plugin.getDataFolder(), "config/chat-messaging");
         if (!folder.exists()) folder.mkdirs();
 
-        File dest = new File(folder, "events.yml");
+        File dest = new File(folder, "config/events.yml");
         if (dest.exists()) return;
 
-        File old = new File(plugin.getDataFolder(), "events.yml");
+        File old = new File(plugin.getDataFolder(), "config/events.yml");
         if (old.exists()) {
             try {
                 Files.copy(old.toPath(), dest.toPath());

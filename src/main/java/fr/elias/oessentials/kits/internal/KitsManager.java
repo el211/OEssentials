@@ -50,10 +50,10 @@ public class KitsManager {
         if (!plugin.getDataFolder().exists()) plugin.getDataFolder().mkdirs();
 
         // Ensure default kits.yml is written from JAR
-        kitsFile = new File(plugin.getDataFolder(), "kits.yml");
+        kitsFile = new File(plugin.getDataFolder(), "config/kits.yml");
         if (!kitsFile.exists()) {
             try {
-                plugin.saveResource("kits.yml", false);
+                plugin.saveResource("config/kits.yml", false);
                 plugin.getLogger().info("[Kits] Wrote default kits.yml");
             } catch (IllegalArgumentException iae) {
                 plugin.getLogger().severe("[Kits] kits.yml is missing from the JAR (saveResource failed).");
@@ -61,7 +61,7 @@ public class KitsManager {
             }
         }
 
-        dataFile = new File(plugin.getDataFolder(), "kitsdata.yml");
+        dataFile = new File(plugin.getDataFolder(), "data/kitsdata.yml");
         if (!dataFile.exists()) {
             try { dataFile.createNewFile(); } catch (IOException ignored) {}
         }

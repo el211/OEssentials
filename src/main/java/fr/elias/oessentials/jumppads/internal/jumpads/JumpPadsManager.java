@@ -94,9 +94,9 @@ public class JumpPadsManager {
         this.defaultUseLookDir = c.getBoolean("jumpads.default_useLookDir", true);
 
         // Data file
-        File serverFolder = new File(plugin.getDataFolder(), "server");
+        File serverFolder = new File(plugin.getDataFolder(), "config/server");
         if (!serverFolder.exists()) serverFolder.mkdirs();
-        this.file = new File(serverFolder, "jumpads.yml");
+        this.file = new File(serverFolder, "config/jumpads.yml");
         if (!file.exists()) {
             try {
                 file.createNewFile();

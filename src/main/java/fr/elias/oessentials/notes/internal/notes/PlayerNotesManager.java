@@ -18,7 +18,7 @@ public class PlayerNotesManager {
 
     public PlayerNotesManager(OEssentials plugin) {
         this.plugin = plugin;
-        this.file = new File(plugin.getDataFolder(), "notes.yml");
+        this.file = new File(plugin.getDataFolder(), "data/notes.yml");
         initializeFile();
         reload();
     }

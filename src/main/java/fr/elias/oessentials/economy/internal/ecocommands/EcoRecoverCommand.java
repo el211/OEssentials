@@ -60,8 +60,8 @@ public class EcoRecoverCommand implements OreoCommand {
         // Search for data files
         List<String> foundSources = new ArrayList<>();
 
-        File yamlFile = new File(plugin.getDataFolder(), "balances.yml");
-        File jsonFile = new File(plugin.getDataFolder(), "balances.json");
+        File yamlFile = new File(plugin.getDataFolder(), "data/balances.yml");
+        File jsonFile = new File(plugin.getDataFolder(), "data/balances.json");
         boolean hasMongo = plugin.getDatabase() != null;
 
         if (yamlFile.exists()) {

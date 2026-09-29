@@ -20,7 +20,7 @@ public final class PlayerSyncPrefsStore {
         this.dHunger  = plugin.getConfig().getBoolean("playersync.hunger", true);
         this.dPotions = plugin.getConfig().getBoolean("playersync.potions", true);
 
-        this.file = new File(plugin.getDataFolder(), "player-sync-prefs.yml");
+        this.file = new File(plugin.getDataFolder(), "data/player-sync-prefs.yml");
         this.cfg  = YamlConfiguration.loadConfiguration(file);
     }
 

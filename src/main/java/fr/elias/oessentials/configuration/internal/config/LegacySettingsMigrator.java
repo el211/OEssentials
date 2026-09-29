@@ -22,11 +22,11 @@ public final class LegacySettingsMigrator {
             dataFolder.mkdirs();
         }
 
-        File settingsFile = new File(dataFolder, "settings.yml");
+        File settingsFile = new File(dataFolder, "config/settings.yml");
 
         if (!settingsFile.exists()) {
             try {
-                plugin.saveResource("settings.yml", false);
+                plugin.saveResource("config/settings.yml", false);
             } catch (IllegalArgumentException ignored) {
                 try {
                     if (!settingsFile.exists()) {
@@ -43,7 +43,7 @@ public final class LegacySettingsMigrator {
         boolean changed = false;
 
         try (InputStreamReader reader = new InputStreamReader(
-                plugin.getResource("settings.yml"),
+                plugin.getResource("config/settings.yml"),
                 StandardCharsets.UTF_8
         )) {
             if (reader != null) {
@@ -136,7 +136,7 @@ public final class LegacySettingsMigrator {
                 settingsCfg, "features.tab.enabled");
 
 
-        changed |= copyBoolFromFileIfMissing(plugin, "rtp.yml", "rtp.enabled",
+        changed |= copyBoolFromFileIfMissing(plugin, "config/rtp.yml", "rtp.enabled",
                 settingsCfg, "features.rtp.enabled");
 
         changed |= copyBoolFromFileIfMissing(plugin, "scoreboard.yml", "scoreboard.enabled",
@@ -167,7 +167,7 @@ public final class LegacySettingsMigrator {
         changed |= copyBoolFromFileIfMissing(plugin, "portals.yml", "portals.enabled",
                 settingsCfg, "features.portals.enabled");
 
-        changed |= copyBoolFromFileIfMissing(plugin, "jumpads.yml", "jumppads.enabled",
+        changed |= copyBoolFromFileIfMissing(plugin, "config/jumpads.yml", "jumppads.enabled",
                 settingsCfg, "features.jumppads.enabled");
         changed |= copyBoolFromFileIfMissing(plugin, "jumppads.yml", "jumppads.enabled",
                 settingsCfg, "features.jumppads.enabled");
@@ -177,9 +177,9 @@ public final class LegacySettingsMigrator {
         changed |= copyBoolFromFileIfMissing(plugin, "vaults.yml", "playervaults.enabled",
                 settingsCfg, "features.playervaults.enabled");
 
-        changed |= copyBoolFromFileIfMissing(plugin, "kits.yml", "kits.enabled",
+        changed |= copyBoolFromFileIfMissing(plugin, "config/kits.yml", "kits.enabled",
                 settingsCfg, "features.kits.enabled");
-        changed |= copyBoolFromFileIfMissing(plugin, "kits.yml", "kits.register-commands",
+        changed |= copyBoolFromFileIfMissing(plugin, "config/kits.yml", "kits.register-commands",
                 settingsCfg, "features.kits.register-commands");
         changed |= copyBoolFromFileIfMissing(plugin, "mobs.yml", "mobs.enabled",
                 settingsCfg, "features.mobs.enabled");

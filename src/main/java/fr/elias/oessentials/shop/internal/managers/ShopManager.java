@@ -59,7 +59,7 @@ public final class ShopManager {
             dir.mkdirs();
             for (String name : BUNDLED_SHOPS) {
                 try {
-                    module.getPlugin().saveResource("shop/shops/" + name + ".yml", false);
+                    module.getPlugin().saveResource("config/shop/shops/" + name + ".yml", false);
                 } catch (IllegalArgumentException ignored) {}
             }
             log.info("[Shop] Created shops/ folder and deployed " + BUNDLED_SHOPS.length + " bundled shop(s).");
@@ -73,7 +73,7 @@ public final class ShopManager {
                 File target = new File(dir, name + ".yml");
                 if (!target.exists()) {
                     try {
-                        module.getPlugin().saveResource("shop/shops/" + name + ".yml", false);
+                        module.getPlugin().saveResource("config/shop/shops/" + name + ".yml", false);
                         deployed++;
                     } catch (IllegalArgumentException ignored) {}
                 }

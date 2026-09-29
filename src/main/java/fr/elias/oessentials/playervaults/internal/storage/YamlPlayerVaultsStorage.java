@@ -24,7 +24,7 @@ public final class YamlPlayerVaultsStorage implements PlayerVaultsStorage {
 
     public YamlPlayerVaultsStorage(OEssentials plugin) {
         this.plugin = plugin;
-        this.dir = new File(plugin.getDataFolder(), "vaults");
+        this.dir = new File(plugin.getDataFolder(), "data/vaults");
         if (!dir.exists()) dir.mkdirs();
     }
 

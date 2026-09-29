@@ -30,8 +30,8 @@ public class JsonCurrencyStorage implements CurrencyStorage {
 
     public JsonCurrencyStorage(Plugin plugin) {
         this.plugin = plugin;
-        this.currenciesFile = new File(plugin.getDataFolder(), "currencies.json");
-        this.balancesFile = new File(plugin.getDataFolder(), "currency_balances.json");
+        this.currenciesFile = new File(plugin.getDataFolder(), "data/currencies.json");
+        this.balancesFile = new File(plugin.getDataFolder(), "data/currency_balances.json");
         this.gson = new GsonBuilder().setPrettyPrinting().create();
 
         load();

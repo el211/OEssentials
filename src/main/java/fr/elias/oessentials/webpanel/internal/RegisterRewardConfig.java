@@ -23,14 +23,14 @@ public class RegisterRewardConfig {
     }
 
     public void reload() {
-        File folder = new File(plugin.getDataFolder(), "oreopanel");
+        File folder = new File(plugin.getDataFolder(), "config/oreopanel");
         folder.mkdirs();
         File file = new File(folder, "reward.yml");
         if (!file.exists()) {
-            plugin.saveResource("oreopanel/reward.yml", false);
+            plugin.saveResource("config/oreopanel/reward.yml", false);
         }
         config = YamlConfiguration.loadConfiguration(file);
-        InputStream in = plugin.getResource("oreopanel/reward.yml");
+        InputStream in = plugin.getResource("config/oreopanel/reward.yml");
         if (in != null) {
             config.setDefaults(YamlConfiguration.loadConfiguration(
                     new InputStreamReader(in, StandardCharsets.UTF_8)));

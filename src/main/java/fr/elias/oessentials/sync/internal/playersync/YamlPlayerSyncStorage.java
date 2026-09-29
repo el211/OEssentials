@@ -13,7 +13,7 @@ public final class YamlPlayerSyncStorage implements PlayerSyncStorage {
 
     public YamlPlayerSyncStorage(OEssentials plugin) {
         this.plugin = plugin;
-        this.file = new File(plugin.getDataFolder(), "player-sync.yml");
+        this.file = new File(plugin.getDataFolder(), "config/player-sync.yml");
         this.cfg  = YamlConfiguration.loadConfiguration(file);
     }
 

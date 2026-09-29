@@ -26,7 +26,7 @@ public class AfkConfig {
 
     public AfkConfig(Plugin plugin) {
         this.plugin = plugin;
-        this.file   = new File(new File(plugin.getDataFolder(), "afk"), "config.yml");
+        this.file   = new File(new File(plugin.getDataFolder(), "config/afk"), "config.yml");
         reload();
     }
 

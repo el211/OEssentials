@@ -21,7 +21,7 @@ public class IpTracker implements Listener {
 
     public IpTracker(OEssentials plugin) {
         this.plugin = plugin;
-        this.file = new File(plugin.getDataFolder(), "ips.yml");
+        this.file = new File(plugin.getDataFolder(), "data/ips.yml");
         if (!file.exists()) try { file.createNewFile(); } catch (Exception ignored) {}
         this.cfg = YamlConfiguration.loadConfiguration(file);
         Bukkit.getPluginManager().registerEvents(this, plugin);

@@ -20,7 +20,7 @@ public final class NametageToggleStore {
     private final Set<UUID> toggledOff = new HashSet<>();
 
     public NametageToggleStore(OEssentials plugin) {
-        File folder = new File(plugin.getDataFolder(), "custom-nameplates");
+        File folder = new File(plugin.getDataFolder(), "config/custom-nameplates");
         folder.mkdirs();
         this.file = new File(folder, "toggled-off.yml");
         load();

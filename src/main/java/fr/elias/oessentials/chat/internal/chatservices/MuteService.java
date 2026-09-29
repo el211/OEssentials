@@ -48,7 +48,7 @@ public class MuteService {
     public MuteService(Plugin plugin) {
         this.plugin = plugin;
         this.logger = plugin.getLogger();
-        this.file = new File(plugin.getDataFolder(), "mutes.yml");
+        this.file = new File(plugin.getDataFolder(), "data/mutes.yml");
         if (!file.exists()) {
             try {
                 plugin.getDataFolder().mkdirs();
@@ -69,7 +69,7 @@ public class MuteService {
     MuteService(Logger logger, File dataFolder) {
         this.plugin = null;
         this.logger = Objects.requireNonNull(logger, "logger");
-        this.file   = new File(dataFolder, "mutes.yml");
+        this.file   = new File(dataFolder, "data/mutes.yml");
         if (!this.file.exists()) {
             try {
                 dataFolder.mkdirs();

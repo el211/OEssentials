@@ -46,7 +46,7 @@ public final class AuctionHouseConfig {
     private final Set<AuctionCategory> enabledCategories = EnumSet.noneOf(AuctionCategory.class);
 
     public AuctionHouseConfig(OEssentials plugin) {
-        this.folder = new File(plugin.getDataFolder(), "auctionhouse");
+        this.folder = new File(plugin.getDataFolder(), "config/auctionhouse");
         if (!folder.exists()) folder.mkdirs();
 
         saveDefault("config.yml");

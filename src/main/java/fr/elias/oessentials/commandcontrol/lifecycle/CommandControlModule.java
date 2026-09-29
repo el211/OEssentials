@@ -18,7 +18,7 @@ public final class CommandControlModule extends ManagedModule implements Command
     private void initCommandControl() {
         try {
             java.io.File f = new java.io.File(plugin.getDataFolder(), "commandsmodule/command-control.yml");
-            if (!f.exists()) { f.getParentFile().mkdirs(); plugin.saveResource("commandsmodule/command-control.yml", false); }
+            if (!f.exists()) { f.getParentFile().mkdirs(); plugin.saveResource("config/commandsmodule/command-control.yml", false); }
             var yml = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(f);
             this.commandControlService = new fr.elias.oessentials.commandcontrol.internal.CommandControlService();
             commandControlService.load(yml);
@@ -37,7 +37,7 @@ public final class CommandControlModule extends ManagedModule implements Command
 
         try {
             java.io.File f = new java.io.File(plugin.getDataFolder(), "server/clearlag.yml");
-            if (!f.exists()) { f.getParentFile().mkdirs(); plugin.saveResource("server/clearlag.yml", false); }
+            if (!f.exists()) { f.getParentFile().mkdirs(); plugin.saveResource("config/server/clearlag.yml", false); }
         } catch (Throwable ignored) {}
     }
 }

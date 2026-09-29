@@ -123,9 +123,9 @@ public class TabListManager {
     }
 
     public void load() {
-        file = new File(plugin.getDataFolder(), "scoreboard-tab/tab.yml");
+        file = new File(plugin.getDataFolder(), "config/scoreboard-tab/tab.yml");
         if (!file.exists()) {
-            plugin.saveResource("scoreboard-tab/tab.yml", false);
+            plugin.saveResource("config/scoreboard-tab/tab.yml", false);
         }
 
         cfg = YamlConfiguration.loadConfiguration(file);

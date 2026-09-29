@@ -89,7 +89,7 @@ public final class ScoreboardService implements Listener {
         this.plugin      = plugin;
         this.cfg         = cfg;
         this.titleAnim   = new AnimatedText(cfg.titleFrames(), cfg.titleFrameTicks());
-        this.toggleFile  = new File(new File(plugin.getDataFolder(), "players"), "sb-toggles.yml");
+        this.toggleFile  = new File(new File(plugin.getDataFolder(), "data/players"), "sb-toggles.yml");
     }
 
     // -------------------------------------------------------------------------

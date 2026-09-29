@@ -30,13 +30,13 @@ public class OreoShardsModule {
     public void enable() {
         plugin.getLogger().info("[Sharding] Starting initialization...");
 
-        File serverFolder = new File(plugin.getDataFolder(), "server");
+        File serverFolder = new File(plugin.getDataFolder(), "config/server");
         if (!serverFolder.exists()) serverFolder.mkdirs();
         File configFile = new File(serverFolder, "shards.yml");
 
         if (!configFile.exists()) {
             try {
-                plugin.saveResource("server/shards.yml", false);
+                plugin.saveResource("config/server/shards.yml", false);
                 plugin.getLogger().info("[Sharding] Created server/shards.yml from resources");
             } catch (Exception e) {
                 plugin.getLogger().info("[Sharding] Creating default server/shards.yml...");

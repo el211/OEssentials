@@ -18,7 +18,7 @@ public class YamlEconomyService implements EconomyService {
 
     public YamlEconomyService(Plugin plugin) {
         this.plugin = plugin;
-        this.file = new File(plugin.getDataFolder(), "balances.yml");
+        this.file = new File(plugin.getDataFolder(), "data/balances.yml");
         load();
     }
 

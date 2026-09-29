@@ -21,7 +21,7 @@ public final class ShopConfig {
 
     public ShopConfig(OEssentials plugin) {
         this.plugin     = plugin;
-        this.shopFolder = new File(plugin.getDataFolder(), "shop");
+        this.shopFolder = new File(plugin.getDataFolder(), "config/shop");
         reload();
     }
 

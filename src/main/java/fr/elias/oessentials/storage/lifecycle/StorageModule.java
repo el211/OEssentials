@@ -65,7 +65,7 @@ public final class StorageModule extends ManagedModule implements StorageService
         java.io.File pwCfgFile = new java.io.File(plugin.getDataFolder(), "playerwarps/config.yml");
         if (!pwCfgFile.exists()) {
             pwCfgFile.getParentFile().mkdirs();
-            plugin.saveResource("playerwarps/config.yml", false);
+            plugin.saveResource("data/playerwarps/config.yml", false);
         }
         this.playerWarpsConfig = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(pwCfgFile);
 
@@ -163,7 +163,7 @@ public final class StorageModule extends ManagedModule implements StorageService
 
     public void reloadPlayerWarpsConfig() {
         java.io.File f = new java.io.File(plugin.getDataFolder(), "playerwarps/config.yml");
-        if (!f.exists()) plugin.saveResource("playerwarps/config.yml", false);
+        if (!f.exists()) plugin.saveResource("data/playerwarps/config.yml", false);
         this.playerWarpsConfig = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(f);
     }
 }

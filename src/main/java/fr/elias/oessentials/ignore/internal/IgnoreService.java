@@ -19,7 +19,7 @@ public class IgnoreService {
 
     public IgnoreService(Plugin plugin) {
         this.plugin = plugin;
-        this.file   = new File(plugin.getDataFolder(), "ignore.yml");
+        this.file   = new File(plugin.getDataFolder(), "data/ignore.yml");
         if (!file.exists()) {
             try { plugin.getDataFolder().mkdirs(); file.createNewFile(); }
             catch (IOException e) { plugin.getLogger().severe("[Ignore] Cannot create ignore.yml: " + e.getMessage()); }

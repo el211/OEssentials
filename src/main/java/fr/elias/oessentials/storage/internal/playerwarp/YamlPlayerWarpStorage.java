@@ -55,7 +55,7 @@ public class YamlPlayerWarpStorage implements PlayerWarpStorage {
 
     public YamlPlayerWarpStorage(OEssentials plugin) {
         this.plugin = plugin;
-        this.file = new File(plugin.getDataFolder(), "playerwarps.yml");
+        this.file = new File(plugin.getDataFolder(), "data/playerwarps.yml");
         loadFile();
         loadAllFromConfig();
     }

@@ -51,10 +51,10 @@ public final class DailyConfig {
     }
 
     public void load() {
-        file = new File(plugin.getDataFolder(), "dailyrewards/dailyrewards.yml");
+        file = new File(plugin.getDataFolder(), "config/dailyrewards/dailyrewards.yml");
         if (!file.exists()) {
             file.getParentFile().mkdirs();
-            plugin.saveResource("dailyrewards/dailyrewards.yml", false);
+            plugin.saveResource("config/dailyrewards/dailyrewards.yml", false);
         }
         cfg = YamlConfiguration.loadConfiguration(file);
 

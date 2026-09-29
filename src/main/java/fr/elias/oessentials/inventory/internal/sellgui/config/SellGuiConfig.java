@@ -32,8 +32,8 @@ public final class SellGuiConfig {
     }
 
     public void reload() {
-        if (file == null) file = new File(plugin.getDataFolder(), "sellgui.yml");
-        if (!file.exists()) plugin.saveResource("sellgui.yml", false);
+        if (file == null) file = new File(plugin.getDataFolder(), "config/sellgui.yml");
+        if (!file.exists()) plugin.saveResource("config/sellgui.yml", false);
 
         cfg = YamlConfiguration.loadConfiguration(file);
 

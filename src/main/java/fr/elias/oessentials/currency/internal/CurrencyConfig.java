@@ -20,9 +20,9 @@ public class CurrencyConfig {
 
     public CurrencyConfig(Plugin plugin) {
         this.plugin = plugin;
-        File folder = new File(plugin.getDataFolder(), "custom-currencies");
+        File folder = new File(plugin.getDataFolder(), "config/custom-currencies");
         if (!folder.exists()) folder.mkdirs();
-        this.configFile = new File(folder, "currency-config.yml");
+        this.configFile = new File(folder, "config/currency-config.yml");
         load();
     }
 

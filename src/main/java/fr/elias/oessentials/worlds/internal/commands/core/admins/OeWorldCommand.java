@@ -50,7 +50,7 @@ public final class OeWorldCommand implements OreoCommand, TabCompleter {
 
     public OeWorldCommand(OEssentials plugin) {
         this.plugin     = plugin;
-        this.worldsFile = new File(plugin.getDataFolder(), "worlds.yml");
+        this.worldsFile = new File(plugin.getDataFolder(), "config/worlds.yml");
     }
 
     @Override public String       name()       { return "oeworld"; }
@@ -68,7 +68,7 @@ public final class OeWorldCommand implements OreoCommand, TabCompleter {
      * Reads worlds.yml and loads any worlds not already present in Bukkit.
      */
     public static void loadCustomWorlds(OEssentials plugin) {
-        File file = new File(plugin.getDataFolder(), "worlds.yml");
+        File file = new File(plugin.getDataFolder(), "config/worlds.yml");
         if (!file.exists()) return;
 
         Logger log = plugin.getLogger();

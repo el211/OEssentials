@@ -21,7 +21,7 @@ public final class YamlPlaytimeDataStore implements PlaytimeDataStore {
 
     public YamlPlaytimeDataStore(OEssentials plugin) {
         this.plugin = plugin;
-        this.file = new File(plugin.getDataFolder(), "prewards_data.yml");
+        this.file = new File(plugin.getDataFolder(), "data/prewards_data.yml");
         this.cfg = YamlConfiguration.loadConfiguration(file);
     }
 

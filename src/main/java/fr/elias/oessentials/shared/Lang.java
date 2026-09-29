@@ -58,7 +58,7 @@ public final class Lang {
     public static void init(OEssentials pl) {
         plugin = Objects.requireNonNull(pl, "plugin");
 
-        File langFolder = new File(plugin.getDataFolder(), "lang");
+        File langFolder = new File(plugin.getDataFolder(), "config/lang");
         if (!langFolder.exists()) {
             langFolder.mkdirs();
         }
@@ -66,7 +66,7 @@ public final class Lang {
         currentLanguage = plugin.getConfig().getString("server.language",
                 plugin.getConfig().getString("language", "en")).toLowerCase();
 
-        File oldLangFile = new File(plugin.getDataFolder(), "lang.yml");
+        File oldLangFile = new File(plugin.getDataFolder(), "config/lang.yml");
         File newLangFile = new File(langFolder, "lang_" + currentLanguage + ".yml");
 
         if (oldLangFile.exists()) {
@@ -128,7 +128,7 @@ public final class Lang {
             File targetFile = new File(langFolder, fileName);
 
             if (!targetFile.exists()) {
-                try (InputStream is = plugin.getResource("lang/" + fileName)) {
+                try (InputStream is = plugin.getResource("config/lang/" + fileName)) {
                     if (is != null) {
                         Files.copy(is, targetFile.toPath());
                         plugin.getLogger().info("[Lang] Extracted " + fileName);
@@ -142,7 +142,7 @@ public final class Lang {
 
 
     private static void loadLanguageFile(String language) {
-        File langFolder = new File(plugin.getDataFolder(), "lang");
+        File langFolder = new File(plugin.getDataFolder(), "config/lang");
         File langFile = new File(langFolder, "lang_" + language + ".yml");
 
         if (!langFile.exists()) {
@@ -154,7 +154,7 @@ public final class Lang {
 
         cfg = YamlConfiguration.loadConfiguration(langFile);
 
-        try (InputStream is = plugin.getResource("lang/lang_" + currentLanguage + ".yml")) {
+        try (InputStream is = plugin.getResource("config/lang/lang_" + currentLanguage + ".yml")) {
             if (is != null) {
                 YamlConfiguration defCfg = YamlConfiguration.loadConfiguration(
                         new InputStreamReader(is, StandardCharsets.UTF_8)

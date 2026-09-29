@@ -24,7 +24,7 @@ import java.util.logging.Logger;
  */
 public final class GroupRtpConfig {
 
-    private static final String FILE_NAME = "group-rtp.yml";
+    private static final String FILE_NAME = "config/group-rtp.yml";
 
     private final Plugin   plugin;
     private final Logger   log;

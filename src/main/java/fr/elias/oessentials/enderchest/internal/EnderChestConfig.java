@@ -24,11 +24,11 @@ public final class EnderChestConfig {
     public void reload() {
         try {
             if (file == null) {
-                File folder = new File(plugin.getDataFolder(), "enderchests");
+                File folder = new File(plugin.getDataFolder(), "data/enderchests");
                 if (!folder.exists()) folder.mkdirs();
                 file = new File(folder, "enderchest.yml");
             }
-            if (!file.exists()) plugin.saveResource("enderchests/enderchest.yml", false);
+            if (!file.exists()) plugin.saveResource("data/enderchests/enderchest.yml", false);
             cfg = YamlConfiguration.loadConfiguration(file);
         } catch (Exception e) {
             plugin.getLogger().warning("[EC] Failed to load enderchests/enderchest.yml: " + e.getMessage());

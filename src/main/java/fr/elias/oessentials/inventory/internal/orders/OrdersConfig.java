@@ -48,10 +48,10 @@ public final class OrdersConfig {
     private String langCode; // e.g. "en", "fr"
 
     public OrdersConfig(OEssentials plugin) {
-        this.folder = new File(plugin.getDataFolder(), "orders");
+        this.folder = new File(plugin.getDataFolder(), "data/orders");
         if (!folder.exists()) folder.mkdirs();
 
-        saveDefault("settings.yml");
+        saveDefault("config/settings.yml");
         saveDefault("lang_en.yml");
         saveDefault("lang_fr.yml");
         saveDefault("gui.yml");
@@ -60,7 +60,7 @@ public final class OrdersConfig {
     }
 
     public void reload() {
-        YamlConfiguration settings = YamlConfiguration.loadConfiguration(new File(folder, "settings.yml"));
+        YamlConfiguration settings = YamlConfiguration.loadConfiguration(new File(folder, "config/settings.yml"));
         gui  = YamlConfiguration.loadConfiguration(new File(folder, "gui.yml"));
 
         langCode = settings.getString("orders.lang", "en").toLowerCase(Locale.ROOT).trim();

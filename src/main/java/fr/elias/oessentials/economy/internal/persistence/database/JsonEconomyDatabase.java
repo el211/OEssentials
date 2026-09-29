@@ -41,7 +41,7 @@ public class JsonEconomyDatabase implements PlayerEconomyDatabase {
     @Override
     public boolean connect(String url, String user, String password) {
         try {
-            this.file = new File(plugin.getDataFolder(), "economy.json");
+            this.file = new File(plugin.getDataFolder(), "data/economy.json");
             load();
             return true;
         } catch (Exception e) {

@@ -16,7 +16,7 @@ public final class CustomNameplatesConfig {
     private File file;
     private FileConfiguration cfg;
 
-    private static final String RESOURCE_PATH = "custom-nameplates/config.yml";
+    private static final String RESOURCE_PATH = "config/custom-nameplates/config.yml";
 
     public CustomNameplatesConfig(OEssentials plugin) {
         this.plugin = plugin;
@@ -24,7 +24,7 @@ public final class CustomNameplatesConfig {
     }
 
     public void reload() {
-        File folder = new File(plugin.getDataFolder(), "custom-nameplates");
+        File folder = new File(plugin.getDataFolder(), "config/custom-nameplates");
         if (!folder.exists()) folder.mkdirs();
 
         file = new File(folder, "config.yml");

@@ -35,7 +35,7 @@ public final class DailyFileStore {
 
     public DailyFileStore(OEssentials plugin) {
         this.plugin = plugin;
-        this.dataFile = new File(plugin.getDataFolder(), "daily_players.yml");
+        this.dataFile = new File(plugin.getDataFolder(), "data/daily_players.yml");
     }
 
     public void load() {

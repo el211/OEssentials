@@ -31,8 +31,8 @@ public final class RtpConfig {
 
     public void reload() {
         try {
-            if (file == null) file = new File(plugin.getDataFolder(), "rtp.yml");
-            if (!file.exists()) plugin.saveResource("rtp.yml", false);
+            if (file == null) file = new File(plugin.getDataFolder(), "config/rtp.yml");
+            if (!file.exists()) plugin.saveResource("config/rtp.yml", false);
             cfg = YamlConfiguration.loadConfiguration(file);
         } catch (Exception e) {
             plugin.getLogger().warning("[RTP] Failed to load rtp.yml: " + e.getMessage());
