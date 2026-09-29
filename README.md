@@ -1,5 +1,7 @@
 # 🍪 OreoEssentials
 
+Developer documentation: [MinecraftModulith architecture and build instructions](docs/architecture/README.md).
+
 ---
 
 > ## ⛔ FORKING POLICY — READ BEFORE ANYTHING ELSE
