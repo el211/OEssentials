@@ -1,0 +1,62 @@
+package fr.elias.oessentials.player.internal.deathback;
+
+import fr.elias.oessentials.platform.commands.OreoCommand;
+import fr.elias.oessentials.shared.Lang;
+import fr.elias.oessentials.platform.scheduling.OreScheduler;
+import org.bukkit.Location;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+import java.util.List;
+
+public class DeathBackCommand implements OreoCommand {
+    private final DeathBackService deathBack;
+
+    public DeathBackCommand(DeathBackService deathBack) {
+        this.deathBack = deathBack;
+    }
+
+    @Override public String name() { return "deathback"; }
+    @Override public List<String> aliases() { return List.of("backdeath", "db"); }
+    @Override public String permission() { return "oreo.deathback"; }
+    @Override public String usage() { return ""; }
+    @Override public boolean playerOnly() { return true; }
+
+    @Override
+    public boolean execute(CommandSender sender, String label, String[] args) {
+        Player p = (Player) sender;
+
+        Location loc = deathBack.getLastDeath(p.getUniqueId());
+        if (loc == null) {
+            Lang.send(p, "deathback.no-location",
+                    "<red>No death location stored.</red>");
+            return true;
+        }
+
+        OreScheduler.runForEntity(fr.elias.oessentials.OEssentials.get(), p, () -> {
+            if (OreScheduler.isFolia()) {
+                p.teleportAsync(loc).whenComplete((ok, error) ->
+                        OreScheduler.runForEntity(fr.elias.oessentials.OEssentials.get(), p, () -> {
+                            if (error == null && Boolean.TRUE.equals(ok)) {
+                                Lang.send(p, "deathback.success",
+                                        "<green>Teleported to your last death.</green>");
+                            } else {
+                                Lang.send(p, "deathback.failed",
+                                        "<red>Teleport failed.</red>");
+                            }
+                        }));
+            } else {
+                boolean ok = p.teleport(loc);
+                if (ok) {
+                    Lang.send(p, "deathback.success",
+                            "<green>Teleported to your last death.</green>");
+                } else {
+                    Lang.send(p, "deathback.failed",
+                            "<red>Teleport failed.</red>");
+                }
+            }
+        });
+
+        return true;
+    }
+}
