@@ -1,4 +1,4 @@
-package fr.elias.oreoEssentials.modules.aliases;
+package fr.elias.oreoEssentials.commandcontrol.internal.aliases;
 
 import org.bukkit.command.CommandSender;
 import org.junit.jupiter.api.BeforeEach;

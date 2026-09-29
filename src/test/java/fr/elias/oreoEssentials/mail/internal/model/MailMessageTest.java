@@ -1,4 +1,4 @@
-package fr.elias.oreoEssentials.modules.mail.model;
+package fr.elias.oreoEssentials.mail.internal.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

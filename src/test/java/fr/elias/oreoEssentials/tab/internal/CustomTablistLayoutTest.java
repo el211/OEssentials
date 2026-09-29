@@ -1,4 +1,4 @@
-package fr.elias.oreoEssentials.modules.tab;
+package fr.elias.oreoEssentials.tab.internal;
 
 import com.github.retrooper.packetevents.PacketEvents;
 import com.github.retrooper.packetevents.PacketEventsAPI;

@@ -1,4 +1,4 @@
-package fr.elias.oreoEssentials.modules.chat.chatservices;
+package fr.elias.oreoEssentials.chat.internal.chatservices;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

@@ -1,10 +1,10 @@
-package fr.elias.oreoEssentials.rabbitmq.packet;
+package fr.elias.oreoEssentials.messaging.internal.rabbitmq.packet;
 
-import fr.elias.oreoEssentials.modules.tp.rabbit.packets.TpaAcceptPacket;
-import fr.elias.oreoEssentials.modules.tp.rabbit.packets.TpaRequestPacket;
-import fr.elias.oreoEssentials.rabbitmq.packet.impl.SendRemoteMessagePacket;
-import fr.elias.oreoEssentials.rabbitmq.stream.FriendlyByteInputStream;
-import fr.elias.oreoEssentials.rabbitmq.stream.FriendlyByteOutputStream;
+import fr.elias.oreoEssentials.player.internal.tp.rabbit.packets.TpaAcceptPacket;
+import fr.elias.oreoEssentials.player.internal.tp.rabbit.packets.TpaRequestPacket;
+import fr.elias.oreoEssentials.messaging.internal.rabbitmq.packet.impl.SendRemoteMessagePacket;
+import fr.elias.oreoEssentials.messaging.internal.rabbitmq.stream.FriendlyByteInputStream;
+import fr.elias.oreoEssentials.messaging.internal.rabbitmq.stream.FriendlyByteOutputStream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
