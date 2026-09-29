@@ -28,8 +28,8 @@ public final class ShopConfig {
 
     public void reload() {
         shopFolder.mkdirs();
-        this.config   = loadOrCreate("shop/config.yml");
-        this.messages = loadOrCreate("shop/messages.yml");
+        this.config   = loadOrCreate("config/shop/config.yml");
+        this.messages = loadOrCreate("config/shop/messages.yml");
         this.language = config.getString("language", "en");
     }
 
@@ -97,7 +97,7 @@ public final class ShopConfig {
     }
 
     public String getLogFile() {
-        return config.getString("logging.log-file", "shop/transactions.log");
+        return config.getString("logging.log-file", "config/shop/transactions.log");
     }
 
     public String getLogFormat() {

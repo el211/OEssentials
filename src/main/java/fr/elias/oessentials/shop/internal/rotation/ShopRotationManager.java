@@ -36,7 +36,7 @@ public final class ShopRotationManager {
     public ShopRotationManager(ShopModule module) {
         this.module          = module;
         this.log             = module.getPlugin().getLogger();
-        this.rotationsFolder = new File(module.getPlugin().getDataFolder(), "shop/rotations");
+        this.rotationsFolder = new File(module.getPlugin().getDataFolder(), "config/shop/rotations");
         rotationsFolder.mkdirs();
     }
 
