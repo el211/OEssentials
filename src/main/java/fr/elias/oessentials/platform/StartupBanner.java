@@ -34,6 +34,22 @@ public final class StartupBanner {
         FONT.put(' ', new String[]{"  ", "  ", "  ", "  ", "  "});
     }
 
+    private static final String OK = "✔";  // ✔
+    private static final String NO = "✖";  // ✖
+
+    /** Bundled (shaded) core libraries: display name -> a class that must be present at runtime. */
+    private static final Map<String, String> CORE_LIBRARIES = new LinkedHashMap<>();
+    static {
+        CORE_LIBRARIES.put("MinecraftModulith", "fr.elias.oessentials.libs.modulith.paper.PaperModulith");
+        CORE_LIBRARIES.put("CommandsAPI", "fr.elias.oessentials.libs.commands.spigot.CommandManager");
+        CORE_LIBRARIES.put("Libby", "fr.elias.oessentials.libs.libby.BukkitLibraryManager");
+        CORE_LIBRARIES.put("bStats", "fr.elias.oessentials.libs.bstats.bukkit.Metrics");
+        CORE_LIBRARIES.put("ClassGraph", "fr.elias.oessentials.libs.classgraph.ClassGraph");
+        CORE_LIBRARIES.put("Gson", "com.google.gson.Gson");
+        CORE_LIBRARIES.put("SmartInvs", "fr.minuskube.inv.SmartInvsPlugin");
+        CORE_LIBRARIES.put("Triumph-GUI", "dev.triumphteam.gui.guis.Gui");
+    }
+
     /** Optional plugins OEssentials integrates with: display name -> Bukkit plugin name. */
     private static final Map<String, String> INTEGRATIONS = new LinkedHashMap<>();
     static {
@@ -78,10 +94,21 @@ public final class StartupBanner {
         for (int i = 0; i < sorted.size(); i += columns) {
             StringBuilder row = new StringBuilder("   ");
             for (int j = i; j < Math.min(i + columns, sorted.size()); j++) {
-                row.append(ChatColor.GREEN).append("[+] ")
+                row.append(ChatColor.GREEN).append(OK).append(' ')
                    .append(ChatColor.GRAY).append(pad(sorted.get(j), cellWidth));
             }
             send(console, row.toString());
+        }
+        send(console, "");
+
+        // ---- Core libraries checklist -----------------------------------------
+        send(console, ChatColor.DARK_GRAY + ">> " + ChatColor.WHITE + "Core libraries "
+                + ChatColor.GRAY + "(bundled)");
+        for (Map.Entry<String, String> e : CORE_LIBRARIES.entrySet()) {
+            boolean present = classPresent(e.getValue());
+            String mark = present ? ChatColor.GREEN + OK : ChatColor.RED + NO;
+            String name = (present ? ChatColor.WHITE : ChatColor.RED) + e.getKey();
+            send(console, "   " + mark + " " + name);
         }
         send(console, "");
 
@@ -90,7 +117,7 @@ public final class StartupBanner {
                 + ChatColor.GRAY + "(optional)");
         for (Map.Entry<String, String> e : INTEGRATIONS.entrySet()) {
             boolean present = Bukkit.getPluginManager().getPlugin(e.getValue()) != null;
-            String mark = present ? ChatColor.GREEN + "[+]" : ChatColor.DARK_GRAY + "[-]";
+            String mark = present ? ChatColor.GREEN + OK : ChatColor.DARK_GRAY + NO;
             String name = (present ? ChatColor.WHITE : ChatColor.DARK_GRAY) + e.getKey();
             String note = present ? "" : ChatColor.DARK_GRAY + " (not installed)";
             send(console, "   " + mark + " " + name + note);
@@ -106,6 +133,15 @@ public final class StartupBanner {
         StringBuilder b = new StringBuilder(s);
         while (b.length() < width) b.append(' ');
         return b.toString();
+    }
+
+    private static boolean classPresent(String className) {
+        try {
+            Class.forName(className, false, StartupBanner.class.getClassLoader());
+            return true;
+        } catch (Throwable t) {
+            return false;
+        }
     }
 
     private static void send(ConsoleCommandSender console, String message) {
