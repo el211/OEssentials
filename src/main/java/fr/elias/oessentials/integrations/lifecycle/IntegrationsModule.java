@@ -47,7 +47,7 @@ public final class IntegrationsModule extends ManagedModule implements Integrati
 
     private void initializeBStats() {
         try {
-            int pluginId = 33870;
+            int pluginId = 34390;
             this.metrics = new Metrics(plugin, pluginId);
             metrics.addCustomChart(new SimplePie("storage_type", () -> plugin.getConfig().getString("essentials.storage", "yaml").toUpperCase()));
             metrics.addCustomChart(new SimplePie("economy_type", () -> services(ConfigurationServices.class).getEconomyEnabled() ? plugin.getConfig().getString("economy.type", "none").toUpperCase() : "Disabled"));
