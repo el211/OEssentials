@@ -41,7 +41,7 @@ public final class ChatModule extends ManagedModule implements ChatServices {
     @Override public fr.elias.oessentials.messaging.internal.oreobotfeatures.listeners.ConversationListener getActiveConversationListener() { return activeConversationListener; }
 
     private void initChat() {
-        this.chatConfig       = new fr.elias.oessentials.chat.internal.CustomConfig(plugin, "chat-messaging/chat-format.yml");
+        this.chatConfig       = new fr.elias.oessentials.chat.internal.CustomConfig(plugin, "config/chat-messaging/chat-format.yml");
         this.chatFormatManager = new fr.elias.oessentials.chat.internal.FormatManager(chatConfig);
 
         boolean discordEnabled = false;
@@ -122,7 +122,7 @@ public final class ChatModule extends ManagedModule implements ChatServices {
     }
 
     private org.bukkit.configuration.file.FileConfiguration loadJoinQuitConfig() {
-        java.io.File f = new java.io.File(plugin.getDataFolder(), "chat-messaging/join-quit-messages.yml");
+        java.io.File f = new java.io.File(plugin.getDataFolder(), "config/chat-messaging/join-quit-messages.yml");
         if (!f.exists()) plugin.saveResource("config/chat-messaging/join-quit-messages.yml", false);
         return org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(f);
     }

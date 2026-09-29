@@ -41,7 +41,7 @@ public final class TradeConfig {
 
     public TradeConfig(JavaPlugin plugin) {
         this.plugin = plugin;
-        java.io.File tradesFolder = new java.io.File(plugin.getDataFolder(), "trades");
+        java.io.File tradesFolder = new java.io.File(plugin.getDataFolder(), "data/trades");
         if (!tradesFolder.exists()) tradesFolder.mkdirs();
         java.io.File tradeFile = new java.io.File(tradesFolder, "trade.yml");
         if (!tradeFile.exists()) plugin.saveResource("data/trades/trade.yml", false);

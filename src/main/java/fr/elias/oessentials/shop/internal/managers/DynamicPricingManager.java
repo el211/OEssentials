@@ -39,7 +39,7 @@ public final class DynamicPricingManager {
 
     public DynamicPricingManager(ShopModule module) {
         this.module   = module;
-        this.dataFile = new File(module.getPlugin().getDataFolder(), "shop/dynamic_prices.yml");
+        this.dataFile = new File(module.getPlugin().getDataFolder(), "config/shop/dynamic_prices.yml");
         load();
         scheduleTasks();
     }

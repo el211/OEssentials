@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public class AfkConfig {
 
-    private static final String RESOURCE_PATH = "afk/config.yml";
+    private static final String RESOURCE_PATH = "config/afk/config.yml";
 
     private final Plugin plugin;
     private final File file;
