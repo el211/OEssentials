@@ -415,7 +415,8 @@ All requests require the header:
 X-Api-Key: oreo_<prefix>_<secret>
 ```
 
-The key is configured in `plugins/OEssentials/webpanel/config.yml`.
+The key is configured in the main `config.yml` under the `web-panel:` section
+(`web-panel.api-key`, `web-panel.url`, `web-panel.enabled`).
 
 ### Endpoints
 
