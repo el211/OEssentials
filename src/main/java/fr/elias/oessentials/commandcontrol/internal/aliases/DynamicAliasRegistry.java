@@ -221,7 +221,27 @@ public final class DynamicAliasRegistry {
     }
 
     private static void removeBindingsFor(Map<String, Command> known, Command command) {
-        known.entrySet().removeIf(entry -> entry.getValue() == command);
+        // command.unregister(map) already did the real deregistration; this is a
+        // secondary cleanup. Some server forks (e.g. Purpur 1.21.8) expose a
+        // knownCommands view whose iterator does not support remove(), which makes
+        // entrySet().removeIf() throw UnsupportedOperationException — fall back to
+        // removing by key, and never let this crash a reload.
+        try {
+            known.entrySet().removeIf(entry -> entry.getValue() == command);
+        } catch (UnsupportedOperationException iteratorImmutable) {
+            java.util.List<String> keys = new ArrayList<>();
+            for (Map.Entry<String, Command> entry : known.entrySet()) {
+                if (entry.getValue() == command) keys.add(entry.getKey());
+            }
+            for (String key : keys) {
+                try {
+                    known.remove(key);
+                } catch (UnsupportedOperationException fullyImmutable) {
+                    // Map cannot be mutated at all; unregister(map) above is the source of truth.
+                    return;
+                }
+            }
+        }
     }
 
     private static String normalizeName(String name) {
