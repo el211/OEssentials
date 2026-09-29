@@ -1,6 +1,6 @@
 package fr.elias.oreoEssentials.api;
 
-import fr.elias.oreoEssentials.modules.warnings.WarnService;
+import fr.elias.oreoEssentials.warnings.internal.WarnService;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

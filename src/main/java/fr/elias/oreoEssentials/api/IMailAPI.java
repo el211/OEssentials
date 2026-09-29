@@ -1,6 +1,6 @@
 package fr.elias.oreoEssentials.api;
 
-import fr.elias.oreoEssentials.modules.mail.model.MailMessage;
+import fr.elias.oreoEssentials.mail.internal.model.MailMessage;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package fr.elias.oreoEssentials.api;
 
-import fr.elias.oreoEssentials.modules.orders.model.FillResult;
-import fr.elias.oreoEssentials.modules.orders.model.Order;
+import fr.elias.oreoEssentials.inventory.internal.orders.model.FillResult;
+import fr.elias.oreoEssentials.inventory.internal.orders.model.Order;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
