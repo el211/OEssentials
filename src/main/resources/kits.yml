@@ -1,9 +1,9 @@
 # =========================
-# OreoEssentials — kits.yml
+# OEssentials — kits.yml
 # =========================
 # GLOBAL NOTES
 # ------------
-# - This file is read by the KitsManager in OreoEssentials.
+# - This file is read by the KitsManager in OEssentials.
 # - Reload it via your global reload command (ex: /oreo reload) or by restarting.
 #
 # FORMATS SUPPORTED BY ItemParser

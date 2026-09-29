@@ -1,5 +1,5 @@
 # ═══════════════════════════════════════════════════════════════
-#             OreoEssentials Currency System Configuration
+#             OEssentials Currency System Configuration
 #                    Using Kyori MiniMessage Format
 # ═══════════════════════════════════════════════════════════════
 
@@ -9,7 +9,7 @@ currency:
 
   # Storage type: json or mongodb
   # - json: Local storage (single server only)
-  # - mongodb: Uses main OreoEssentials MongoDB connection (cross-server)
+  # - mongodb: Uses main OEssentials MongoDB connection (cross-server)
   storage: json
 
   # Default currency ID (for Vault compatibility)

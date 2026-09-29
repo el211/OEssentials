@@ -554,7 +554,7 @@ commands:
 
   oe:
     enabled: true
-    aliases: ["oreoessentials", "oreo", "essentials"]
+    aliases: ["oessentials", "oreo", "essentials"]
   afelius:
     enabled: true
     aliases:

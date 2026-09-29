@@ -1,5 +1,5 @@
 # ═══════════════════════════════════════════════════════════════════════
-#                    OreoEssentials - Help Command
+#                    OEssentials - Help Command
 # ═══════════════════════════════════════════════════════════════════════
 #
 #  Fully configurable /help menu. Supports:
@@ -28,7 +28,7 @@ help:
     - "&8&m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&r"
     - "  &6&lWelcome to the server!"
     - ""
-    - "  &7This server runs &6OreoEssentials&7."
+    - "  &7This server runs &6OEssentials&7."
     - "  &7Visit &eour website &7for more info."
     - ""
     - "  &eDiscord: &fdiscord.gg/yourserver"

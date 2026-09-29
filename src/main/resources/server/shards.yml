@@ -1,4 +1,4 @@
-# OreoEssentials Sharding Configuration
+# OEssentials Sharding Configuration
 # Seamless world sharding like Donut SMP
 
 sharding:
@@ -64,7 +64,7 @@ sharding:
 
 # Important notes:
 # 1. All shard servers MUST use the same world seed
-# 2. All shard servers MUST have OreoEssentials installed
+# 2. All shard servers MUST have OEssentials installed
 # 3. All shard servers MUST connect to the same Redis instance
 # 4. View distance should be kept low (4-6 chunks) for best performance
 # 5. Servers should be on same machine or same datacenter for <1ms latency

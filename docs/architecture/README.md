@@ -1,4 +1,4 @@
-# OreoEssentials module architecture
+# OEssentials module architecture
 
 The `refactor/minecraft-modulith` branch moves plugin composition, service ownership,
 and shutdown into 56 MinecraftModulith modules. The Bukkit entry point retains the
@@ -34,7 +34,7 @@ Build with:
 ./gradlew shadowJar        # just the plugin jar
 ```
 
-The distributable artifact is `build/libs/OreoEssentials-6.9-SNAPSHOT.jar` (the
+The distributable artifact is `build/libs/OEssentials-6.9-SNAPSHOT.jar` (the
 `-plain.jar` beside it is the unshaded classes and is not used for deployment).
 
 > Note: `build.gradle.kts` lists `mavenLocal()` first so the build still succeeds when
@@ -45,7 +45,7 @@ The distributable artifact is `build/libs/OreoEssentials-6.9-SNAPSHOT.jar` (the
 
 | Location | Responsibility |
 | --- | --- |
-| `OreoEssentials` | Bukkit entry point, library loading, compatible public getters and reload methods |
+| `OEssentials` | Bukkit entry point, library loading, compatible public getters and reload methods |
 | `bootstrap/OreoModules` | Explicit catalog of all lifecycle modules; no runtime package scanning |
 | `bootstrap/ManagedModule` | Named service publication, startup rollback, resource ownership and event subscriptions |
 | `bootstrap/features/<feature>` | Feature initialization, private state, named service API and cleanup |

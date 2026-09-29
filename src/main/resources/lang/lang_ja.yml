@@ -1159,7 +1159,7 @@ customcraft:
     usage-delete: "<red>使用方法:</red> /%label% delete <n>"
 
   help:
-    header: "<yellow>OreoEssentials カスタムクラフティング</yellow>"
+    header: "<yellow>OEssentials カスタムクラフティング</yellow>"
     browse: "<yellow>/%label% browse</yellow> <gray>→ レシピブラウザを開く (GUI)</gray>"
     craft: "<yellow>/%label% craft <n></yellow> <gray>→ デザイナーGUIを開く</gray>"
     list: "<yellow>/%label% list</yellow> <gray>→ レシピ名を一覧表示</gray>"

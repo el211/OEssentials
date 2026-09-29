@@ -1158,7 +1158,7 @@ customcraft:
     usage-delete: "<red>Uso:</red> /%label% delete <n>"
 
   help:
-    header: "<yellow>OreoEssentials Custom Crafting</yellow>"
+    header: "<yellow>OEssentials Custom Crafting</yellow>"
     browse: "<yellow>/%label% browse</yellow> <gray>→ abrir navegador de recetas (GUI)</gray>"
     craft: "<yellow>/%label% craft <n></yellow> <gray>→ abrir GUI de diseñador</gray>"
     list: "<yellow>/%label% list</yellow> <gray>→ listar nombres de recetas</gray>"

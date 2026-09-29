@@ -128,17 +128,17 @@ tasks.named<Jar>("jar") {
 }
 
 tasks.shadowJar {
-    // Produce OreoEssentials-<version>.jar as the primary artifact (like maven-shade).
+    // Produce OEssentials-<version>.jar as the primary artifact (like maven-shade).
     archiveClassifier.set("")
     // Project resources are added first, so first-wins keeps our plugin.yml and
     // drops the copy bundled inside SmartInvs.
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     mergeServiceFiles()
-    relocate("dev.oreo.modulith", "fr.elias.oreoessentials.libs.modulith")
-    relocate("io.github.classgraph", "fr.elias.oreoessentials.libs.classgraph")
-    relocate("fr.traqueur.commands", "fr.elias.oreoessentials.libs.commands")
-    relocate("net.byteflux.libby", "fr.elias.oreoessentials.libs.libby")
-    relocate("org.bstats", "fr.elias.oreoessentials.libs.bstats")
+    relocate("dev.oreo.modulith", "fr.elias.oessentials.libs.modulith")
+    relocate("io.github.classgraph", "fr.elias.oessentials.libs.classgraph")
+    relocate("fr.traqueur.commands", "fr.elias.oessentials.libs.commands")
+    relocate("net.byteflux.libby", "fr.elias.oessentials.libs.libby")
+    relocate("org.bstats", "fr.elias.oessentials.libs.bstats")
 }
 
 tasks.build {

@@ -1,4 +1,4 @@
-# 🍪 OreoEssentials
+# 🍪 OEssentials
 
 Developer documentation: [MinecraftModulith architecture and build instructions](docs/architecture/README.md).
 
@@ -22,7 +22,7 @@ Developer documentation: [MinecraftModulith architecture and build instructions]
 
 ---
 
-OreoEssentials is a modern Essentials replacement for single and multi-server Paper networks. It provides homes, warps, kits, GUIs, cross-server syncing (inventory / enderchest / economy), RabbitMQ/Redis/MongoDB integrations, moderation tools, and much more — all designed for high-performance networks.
+OEssentials is a modern Essentials replacement for single and multi-server Paper networks. It provides homes, warps, kits, GUIs, cross-server syncing (inventory / enderchest / economy), RabbitMQ/Redis/MongoDB integrations, moderation tools, and much more — all designed for high-performance networks.
 
 ---
 
@@ -70,17 +70,17 @@ OreoEssentials is a modern Essentials replacement for single and multi-server Pa
 
 ## 🚀 Installation (Single Server)
 
-1. Download `OreoEssentials.jar`.
+1. Download `OEssentials.jar`.
 2. Drop it into your server `/plugins` folder.
 3. Start the server to generate configuration files.
-4. Edit configs under `/plugins/OreoEssentials/`.
+4. Edit configs under `/plugins/OEssentials/`.
 5. Restart the server.
 
 ---
 
 ## 🌍 Cross-Server Setup (Multi-Server Networks)
 
-OreoEssentials is designed to work across Velocity/BungeeCord + multiple Paper servers.
+OEssentials is designed to work across Velocity/BungeeCord + multiple Paper servers.
 
 ### Database (`database.yml`)
 
@@ -89,7 +89,7 @@ mongo:
   enabled: true
   host: "127.0.0.1"
   port: 27017
-  database: "oreoessentials"
+  database: "oessentials"
   username: ""
   password: ""
 
@@ -154,7 +154,7 @@ features:
 **Staff / Admin commands:**
 `/ban` `/tempban` `/unban` `/mute` `/tempmute` `/unmute` `/kick` `/freeze` `/jail` `/unjail` `/invsee` `/sudo` `/vanish` `/oereload` `/oecraft` `/ic`
 
-Full commands & permissions: [docs.oreostudios.fr](https://docs.oreostudios.fr/oreoessentials/)
+Full commands & permissions: [docs.oreostudios.fr](https://docs.oreostudios.fr/oessentials/)
 
 ---
 
@@ -190,31 +190,31 @@ Currency placeholders (via `oreocurrency` expansion — see API section):
 
 ## 🛠️ Developer API
 
-OreoEssentials exposes a full developer API for other plugins.
+OEssentials exposes a full developer API for other plugins.
 
 ### Adding the Dependency
 
 Add to your `plugin.yml`:
 ```yaml
 softdepend:
-  - OreoEssentials
+  - OEssentials
 ```
 
 ### Getting the API Instance
 
 ```java
-RegisteredServiceProvider<OreoEssentialsAPI> rsp =
-    Bukkit.getServicesManager().getRegistration(OreoEssentialsAPI.class);
+RegisteredServiceProvider<OEssentialsAPI> rsp =
+    Bukkit.getServicesManager().getRegistration(OEssentialsAPI.class);
 if (rsp == null) {
-    getLogger().warning("OreoEssentials not loaded — API unavailable.");
+    getLogger().warning("OEssentials not loaded — API unavailable.");
     return;
 }
-OreoEssentialsAPI oes = rsp.getProvider();
+OEssentialsAPI oes = rsp.getProvider();
 ```
 
 Or via the static shorthand:
 ```java
-OreoEssentialsAPI api = OreoEssentialsAPI.get(); // null if not loaded
+OEssentialsAPI api = OEssentialsAPI.get(); // null if not loaded
 ```
 
 ---
@@ -320,9 +320,9 @@ if (gems != null) {
 
 ### Plugin Events
 
-Listen to OreoEssentials events by implementing Bukkit's `@EventHandler`:
+Listen to OEssentials events by implementing Bukkit's `@EventHandler`:
 
-#### Currency Events (`fr.elias.oreoEssentials.api.events`)
+#### Currency Events (`fr.elias.oessentials.api.events`)
 
 **`CurrencyTransactionEvent`** — Async, Cancellable
 Fired before any deposit / withdraw / set-balance operation.
@@ -345,7 +345,7 @@ Fired before a player-to-player currency transfer.
 
 Fields: `getFrom()` · `getTo()` · `getCurrencyId()` · `getAmount()`
 
-#### Hologram Events (`fr.elias.oreoEssentials.modules.holograms.api.events`)
+#### Hologram Events (`fr.elias.oessentials.modules.holograms.api.events`)
 
 | Event | Thread | Cancellable | Description |
 |---|---|---|---|
@@ -396,7 +396,7 @@ All packets carry a unique `packetId (UUID)` set automatically by `PacketManager
 
 ## 🌐 Web Panel REST API
 
-The web panel module (`WebPanelConfig`) connects OreoEssentials to an external Spring Boot dashboard.
+The web panel module (`WebPanelConfig`) connects OEssentials to an external Spring Boot dashboard.
 
 ### Authentication
 
@@ -405,7 +405,7 @@ All requests require the header:
 X-Api-Key: oreo_<prefix>_<secret>
 ```
 
-The key is configured in `plugins/OreoEssentials/webpanel/config.yml`.
+The key is configured in `plugins/OEssentials/webpanel/config.yml`.
 
 ### Endpoints
 
@@ -468,7 +468,7 @@ The key is configured in `plugins/OreoEssentials/webpanel/config.yml`.
 
 When reporting a bug, include:
 - Server version (Paper/Spigot build)
-- OreoEssentials version
+- OEssentials version
 - Startup log / stacktrace
 - Relevant config snippets
 
@@ -493,7 +493,7 @@ For formal copyright claims, permission requests, or commercial use inquiries, o
 ## 📄 License
 
 See the `LICENSE` file in this repository for full licensing terms.
-Check the live license page: https://docs.oreostudios.fr/oreoessentials/general-license/general-license-oreoessentials
+Check the live license page: https://docs.oreostudios.fr/oessentials/general-license/general-license-oessentials
 
 ---
 

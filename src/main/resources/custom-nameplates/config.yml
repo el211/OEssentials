@@ -1,6 +1,6 @@
 # ─────────────────────────────────────────────────────────────────────────────
-#  OreoEssentials — Custom Nameplates
-#  Folder: plugins/OreoEssentials/custom-nameplates/config.yml
+#  OEssentials — Custom Nameplates
+#  Folder: plugins/OEssentials/custom-nameplates/config.yml
 # ─────────────────────────────────────────────────────────────────────────────
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -284,7 +284,7 @@ bossbars:
 # ══════════════════════════════════════════════════════════════════════════════
 #  HOLOGRAM CONDITIONS (reference — data stored in holograms.yml at runtime)
 #  Conditions can be added to any hologram via /hologram edit <name> or by
-#  editing plugins/OreoEssentials/holograms/holograms.yml directly.
+#  editing plugins/OEssentials/holograms/holograms.yml directly.
 #
 #  Each hologram entry in that file accepts a `conditions:` list.
 #  ALL listed conditions must pass for the hologram to be visible to a player.

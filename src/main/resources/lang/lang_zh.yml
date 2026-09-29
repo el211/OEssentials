@@ -1158,7 +1158,7 @@ customcraft:
     usage-delete: "<red>用法:</red> /%label% delete <n>"
 
   help:
-    header: "<yellow>OreoEssentials 自定义合成</yellow>"
+    header: "<yellow>OEssentials 自定义合成</yellow>"
     browse: "<yellow>/%label% browse</yellow> <gray>→ 打开配方浏览器 (GUI)</gray>"
     craft: "<yellow>/%label% craft <n></yellow> <gray>→ 打开设计器GUI</gray>"
     list: "<yellow>/%label% list</yellow> <gray>→ 列出配方名称</gray>"

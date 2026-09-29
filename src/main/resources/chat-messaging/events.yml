@@ -1,4 +1,4 @@
-# OreoEssentials — events.yml
+# OEssentials — events.yml
 # Run command lists when specific events fire.
 # Syntax per line:
 #   asConsole! <command>        # run as console (default if no directive)

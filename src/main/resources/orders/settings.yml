@@ -4,7 +4,7 @@ orders:
 
   # Language for all Orders module messages and GUI labels.
   # Bundled: "en" (English), "fr" (French).
-  # To add your own, create lang_XX.yml in plugins/OreoEssentials/orders/.
+  # To add your own, create lang_XX.yml in plugins/OEssentials/orders/.
   lang: "en"
 
   # Set to true to get verbose debug logs in console.
@@ -17,7 +17,7 @@ orders:
     type: "sqlite"
 
     sqlite:
-      # SQLite database file, relative to plugins/OreoEssentials/orders/
+      # SQLite database file, relative to plugins/OEssentials/orders/
       file: "orders.db"
 
     mongodb:
@@ -50,7 +50,7 @@ orders:
     # Allow Vault economy as a payment currency.
     allow_vault: true
 
-    # Allow OreoEssentials custom currencies.
+    # Allow OEssentials custom currencies.
     allow_custom_currencies: true
 
     # Default currency shown first in the picker (use "vault" for Vault or a currency ID).

@@ -1,6 +1,6 @@
 # ==========================================================
-# OreoEssentials — Playtime Rewards (SmartInvs GUI)
-# File: plugins/OreoEssentials/playtime_rewards.yml
+# OEssentials — Playtime Rewards (SmartInvs GUI)
+# File: plugins/OEssentials/playtime_rewards.yml
 # ==========================================================
 # How it works:
 # - One-time rewards: trigger once when total playtime >= PayFor (seconds)

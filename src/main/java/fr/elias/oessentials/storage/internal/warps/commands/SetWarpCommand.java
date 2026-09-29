@@ -1,0 +1,82 @@
+package fr.elias.oessentials.storage.internal.warps.commands;
+
+import fr.elias.oessentials.OEssentials;
+import fr.elias.oessentials.platform.commands.OreoCommand;
+import fr.elias.oessentials.storage.internal.warps.rabbit.WarpDirectory;
+import fr.elias.oessentials.storage.internal.warps.WarpService;
+import fr.elias.oessentials.platform.scheduling.Async;
+import fr.elias.oessentials.shared.Lang;
+import fr.elias.oessentials.platform.scheduling.OreScheduler;
+import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+public class SetWarpCommand implements OreoCommand {
+    private final WarpService warps;
+
+    public SetWarpCommand(WarpService warps) {
+        this.warps = warps;
+    }
+
+    @Override public String name() { return "setwarp"; }
+    @Override public List<String> aliases() { return List.of(); }
+    @Override public String permission() { return "oreo.setwarp"; }
+    @Override public String usage() { return "<name>"; }
+    @Override public boolean playerOnly() { return true; }
+
+    @Override
+    public boolean execute(CommandSender sender, String label, String[] args) {
+        if (!sender.hasPermission("oreo.setwarp")) {
+            Lang.send(sender, "admin.setwarp.no-permission",
+                    "<red>You don't have permission to use this command.</red>");
+            return true;
+        }
+
+        if (args.length < 1) {
+            Lang.send(sender, "admin.setwarp.usage",
+                    "<yellow>Usage: /%label% <name></yellow>",
+                    Map.of("label", label));
+            return true;
+        }
+
+        Player p = (Player) sender;
+        String name = args[0].trim().toLowerCase(Locale.ROOT);
+
+        if (name.length() > 32) {
+            Lang.send(sender, "admin.setwarp.invalid-name-length",
+                    "<red>Warp name must be 32 characters or fewer.</red>");
+            return true;
+        }
+        if (!name.matches("[a-z0-9_\\-]+")) {
+            Lang.send(sender, "admin.setwarp.invalid-name-chars",
+                    "<red>Warp name may only contain letters, digits, underscores, and hyphens.</red>");
+            return true;
+        }
+        org.bukkit.Location loc = p.getLocation();
+        OEssentials plugin = OEssentials.get();
+        String local = plugin.getConfig().getString("server.name", Bukkit.getServer().getName());
+
+        Async.run(() -> {
+            warps.setWarp(name, loc);
+            WarpDirectory warpDir = plugin.getWarpDirectory();
+            if (warpDir != null) warpDir.setWarpServer(name, local);
+
+            OreScheduler.runForEntity(plugin, p, () -> {
+                Lang.send(p, "admin.setwarp.set",
+                        "<green>Warp <aqua>%warp%</aqua> has been set.</green>",
+                        Map.of("warp", name));
+                if (warpDir != null) {
+                    Lang.send(p, "admin.setwarp.cross-server-info",
+                            "<gray>(Cross-server) Warp owner set to <aqua>%server%</aqua>.</gray>",
+                            Map.of("server", local));
+                }
+            });
+        });
+
+        return true;
+    }
+}
