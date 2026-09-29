@@ -1,4 +1,4 @@
-# 🍪 OEssentials
+# OEssentials
 
 Developer documentation: [MinecraftModulith architecture and build instructions](docs/architecture/README.md).
 
@@ -59,7 +59,7 @@ OEssentials is a modern Essentials replacement for single and multi-server Paper
 | Requirement | Details |
 |---|---|
 | Server | Paper / Spigot **1.21+** (Folia supported) |
-| Java | **17+** |
+| Java | **21+** |
 | MongoDB | Recommended for persistence |
 | Redis | Cache and fast sync signals |
 | RabbitMQ | Cross-server messaging |
@@ -70,10 +70,10 @@ OEssentials is a modern Essentials replacement for single and multi-server Paper
 
 ## 🚀 Installation (Single Server)
 
-1. Download `OEssentials.jar`.
+1. Download `OEssentials-7.0.jar`.
 2. Drop it into your server `/plugins` folder.
 3. Start the server to generate configuration files.
-4. Edit configs under `/plugins/OEssentials/`.
+4. Edit configs under `/plugins/OEssentials/config/` (runtime state is written to `/plugins/OEssentials/data/`).
 5. Restart the server.
 
 ---
@@ -129,20 +129,30 @@ features:
 
 ## 🧾 Configuration Files
 
+Since **v7.0** the data folder is organized into two top-level folders:
+
+- **`config/`** — everything you edit (toggles, formats, feature configs)
+- **`data/`** — everything the plugin writes (balances, warps, warnings, per-player state…)
+
+`config.yml` stays at the root (Bukkit requirement). Servers upgrading from the old
+flat layout are migrated automatically on first start (existing root-level files are
+moved into `config/` or `data/`).
+
 | File | Purpose |
 |---|---|
-| `settings.yml` | Core toggles & features |
-| `database.yml` | MongoDB / PostgreSQL / Redis |
-| `rabbitmq.yml` | Cross-server messaging |
-| `chat-format.yml` | Chat formats, gradients, channels |
-| `messages.yml` | All translatable messages |
-| `dailyrewards.yml` | Daily rewards |
-| `playtime-rewards.yml` | Playtime reward milestones |
-| `portals.yml` | Portals & jump pads |
-| `aliases.yml` | Command alias editor |
-| `holograms.yml` | OreoHolograms definitions |
-| `afk/config.yml` | AFK module + pool teleport |
-| `orders/` | Market orders module |
+| `config.yml` | Core config (root) |
+| `config/settings.yml` | Core toggles & features |
+| `config/chat-messaging/chat-format.yml` | Chat formats, gradients, channels |
+| `config/lang/` | Translatable messages |
+| `config/dailyrewards/dailyrewards.yml` | Daily rewards |
+| `config/playtime-rewards/playtime_rewards.yml` | Playtime reward milestones |
+| `config/commandsmodule/aliases.yml` | Command alias editor |
+| `config/afk/config.yml` | AFK module + pool teleport |
+| `config/server/` | Server tools (maintenance, motd, rules, clearlag, shards…) |
+| `data/portals/portals.yml` | Portals & jump pads |
+| `data/orders/` | Market orders module |
+| `data/OHolograms/` | OHolograms definitions |
+| `data/playerwarps.yml`, `data/warnings.yml`, … | Plugin-written state |
 
 ---
 
@@ -345,7 +355,7 @@ Fired before a player-to-player currency transfer.
 
 Fields: `getFrom()` · `getTo()` · `getCurrencyId()` · `getAmount()`
 
-#### Hologram Events (`fr.elias.oessentials.modules.holograms.api.events`)
+#### Hologram Events (`fr.elias.oessentials.holograms.internal.api.events`)
 
 | Event | Thread | Cancellable | Description |
 |---|---|---|---|
