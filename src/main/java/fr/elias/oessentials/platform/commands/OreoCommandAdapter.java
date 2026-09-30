@@ -38,6 +38,7 @@ public final class OreoCommandAdapter extends fr.traqueur.commands.spigot.Comman
             this.setGameOnly(true);
         }
 
+        this.setOverride(true);
         this.addOptionalArg("_args", Infinite.class);
     }
 
