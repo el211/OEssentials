@@ -1,13 +1,14 @@
 scoreboard:
   default-enabled: true
-  update-ticks: 20  # Refresh every 0.5 seconds
+  update-ticks: 20
 
   title:
     frame-ticks: 10
     frames:
-      - '&9&lOreo&b&lEssentials'
-      - '&b&lOreo&9&lEssentials'
-      - '&9&lOreo&b&lEssentials'
+      - '<gradient:#DCF6E4:#2BD89F><bold>OEssentials</bold></gradient>'
+      - '<gradient:#2BD89F:#017E6B><bold>OEssentials</bold></gradient>'
+      - '<gradient:#017E6B:#0A4C47><bold>OEssentials</bold></gradient>'
+      - '<gradient:#B1DECB:#2BD89F><bold>OEssentials</bold></gradient>'
 
   worlds:
     whitelist: []
@@ -16,43 +17,53 @@ scoreboard:
   lines:
     - |-
       %animations_<tag interval=5>
-      <gradient:#0099FF:#00FFFF>━━━━━━━━━━━━━━━━━━━━━━</gradient>
+      <gradient:#DCF6E4:#2BD89F>━━━━━━━━━━━━━━━━━━━━━━</gradient>
       |
-      <gradient:#00CCFF:#0099FF>━━━━━━━━━━━━━━━━━━━━━━</gradient>
+      <gradient:#2BD89F:#017E6B>━━━━━━━━━━━━━━━━━━━━━━</gradient>
       |
-      <gradient:#00FFFF:#00CCFF>━━━━━━━━━━━━━━━━━━━━━━</gradient>
+      <gradient:#017E6B:#0A4C47>━━━━━━━━━━━━━━━━━━━━━━</gradient>
       |
-      <gradient:#00CCFF:#00FFFF>━━━━━━━━━━━━━━━━━━━━━━</gradient>
+      <gradient:#0A4C47:#2BD89F>━━━━━━━━━━━━━━━━━━━━━━</gradient>
       |
-      <gradient:#0099FF:#00CCFF>━━━━━━━━━━━━━━━━━━━━━━</gradient>
+      <gradient:#2BD89F:#DCF6E4>━━━━━━━━━━━━━━━━━━━━━━</gradient>
       </tag>%
+
     - ''
-    - '&7Player: &b{player}'
-    - '&7Rank: %luckperms_prefix%%luckperms_primary_group_name%'
+
+    - '<#B1DECB>Player:</#B1DECB> <#DCF6E4>{player}</#DCF6E4>'
+
+    - '<#B1DECB>Rank:</#B1DECB> <#2BD89F>%luckperms_prefix%%luckperms_primary_group_name%</#2BD89F>'
+
     - ''
+
     - |-
       %animations_<tag interval=10>
-      <gradient:#FFD700:#FFA500>Balance:</gradient> &e%vault_eco_balance_formatted%
+      <gradient:#DCF6E4:#2BD89F>Balance:</gradient> <#DCF6E4>%vault_eco_balance_formatted%</#DCF6E4>
       |
-      <gradient:#FFA500:#FFD700>Balance:</gradient> &6%vault_eco_balance_formatted%
+      <gradient:#2BD89F:#017E6B>Balance:</gradient> <#B1DECB>%vault_eco_balance_formatted%</#B1DECB>
       |
-      <gradient:#FFFF00:#FFD700>Balance:</gradient> &e%vault_eco_balance_formatted%
+      <gradient:#017E6B:#2BD89F>Balance:</gradient> <#DCF6E4>%vault_eco_balance_formatted%</#DCF6E4>
       |
-      <gradient:#FFD700:#FFFF00>Balance:</gradient> &6%vault_eco_balance_formatted%
+      <gradient:#2BD89F:#DCF6E4>Balance:</gradient> <#B1DECB>%vault_eco_balance_formatted%</#B1DECB>
       </tag>%
+
     - ''
-    - '&7Online: &a%oreo_network_online%&7/&a%server_max_players%'
+
+    - '<#B1DECB>Online:</#B1DECB> <#2BD89F>%oreo_network_online%</#2BD89F><#0A4C47>/</#0A4C47><#DCF6E4>%server_max_players%</#DCF6E4>'
+
     - ''
+
     - |-
       %animations_<tag interval=5>
-      <gradient:#0099FF:#00FFFF>━━━━━━━━━━━━━━━━━━━━━━</gradient>
+      <gradient:#DCF6E4:#2BD89F>━━━━━━━━━━━━━━━━━━━━━━</gradient>
       |
-      <gradient:#00CCFF:#0099FF>━━━━━━━━━━━━━━━━━━━━━━</gradient>
+      <gradient:#2BD89F:#017E6B>━━━━━━━━━━━━━━━━━━━━━━</gradient>
       |
-      <gradient:#00FFFF:#00CCFF>━━━━━━━━━━━━━━━━━━━━━━</gradient>
+      <gradient:#017E6B:#0A4C47>━━━━━━━━━━━━━━━━━━━━━━</gradient>
       |
-      <gradient:#00CCFF:#00FFFF>━━━━━━━━━━━━━━━━━━━━━━</gradient>
+      <gradient:#0A4C47:#2BD89F>━━━━━━━━━━━━━━━━━━━━━━</gradient>
       |
-      <gradient:#0099FF:#00CCFF>━━━━━━━━━━━━━━━━━━━━━━</gradient>
+      <gradient:#2BD89F:#DCF6E4>━━━━━━━━━━━━━━━━━━━━━━</gradient>
       </tag>%
-    - '&7&oplay.example.com'
+
+    - '<gradient:#2BD89F:#DCF6E4><italic>play.example.com</italic></gradient>'
