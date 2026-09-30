@@ -1,0 +1,31 @@
+package fr.elias.oessentials.skins.internal.skin;
+
+import fr.elias.oessentials.OEssentials;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
+public final class SkinDebug {
+    private static boolean enabled;
+    private static OEssentials plugin;
+
+    private SkinDebug() {}
+
+    public static void init(OEssentials pl) {
+        plugin = pl;
+        enabled = pl.getConfig().getBoolean("debug.skins", false);
+        if (enabled) log("Skin debug ENABLED");
+    }
+
+    public static boolean on() { return enabled; }
+
+    public static void log(String msg) {
+        if (!enabled) return;
+        if (plugin != null) plugin.getLogger().info("[Skins] " + msg);
+        else Bukkit.getLogger().info("[Skins] " + msg);
+    }
+
+    public static void p(Player p, String msg) {
+        if (!enabled || p == null) return;
+        p.sendMessage("§8[§bSkins§8] §7" + msg);
+    }
+}

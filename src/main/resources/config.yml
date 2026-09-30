@@ -1,5 +1,5 @@
 # ===========================
-# OreoEssentials - config.yml
+# OEssentials - config.yml
 # ===========================
 # Reorganized for clarity and maintainability
 # Last updated: 2026-02-12
@@ -132,7 +132,7 @@ playersync:
   # won't wipe their survival inventory. Leave true (default) on all game servers.
   save-on-quit: true
 
-# AFK system → configured in plugins/OreoEssentials/afk/config.yml
+# AFK system → configured in plugins/OEssentials/afk/config.yml
 
 # Jail system
 Jail:
@@ -208,9 +208,9 @@ world_nicknames:
     world_nether: "NETHER"
     world_the_end: "THE END"
 
-# Player vaults configuration is now in: plugins/OreoEssentials/playervaults/config.yml
-# Player warps configuration is now in:  plugins/OreoEssentials/playerwarps/config.yml
-# Daily rewards configuration is now in: plugins/OreoEssentials/dailyrewards/dailyrewards.yml
+# Player vaults configuration is now in: plugins/OEssentials/playervaults/config.yml
+# Player warps configuration is now in:  plugins/OEssentials/playerwarps/config.yml
+# Daily rewards configuration is now in: plugins/OEssentials/dailyrewards/dailyrewards.yml
 
 # ==================== UI ELEMENTS ====================
 
@@ -222,14 +222,14 @@ world_nicknames:
 #   progress: 1.0
 #   update-ticks: 40
 
-# Scoreboard is now configured in: plugins/OreoEssentials/scoreboard-tab/scoreboard.yml
+# Scoreboard is now configured in: plugins/OEssentials/scoreboard-tab/scoreboard.yml
 
 # ==================== CHAT & MESSAGING ====================
 # Join/quit messages, auto-messages, and Oreobot conversations are now
-# configured in: plugins/OreoEssentials/chat-messaging/join-quit-messages.yml
-# Chat format and channels are configured in: plugins/OreoEssentials/chat-messaging/chat-format.yml
-# Death messages are configured in: plugins/OreoEssentials/chat-messaging/death-messages.yml
-# Death messages are configured in: plugins/OreoEssentials/chat-messaging/death-messages.yml
+# configured in: plugins/OEssentials/chat-messaging/join-quit-messages.yml
+# Chat format and channels are configured in: plugins/OEssentials/chat-messaging/chat-format.yml
+# Death messages are configured in: plugins/OEssentials/chat-messaging/death-messages.yml
+# Death messages are configured in: plugins/OEssentials/chat-messaging/death-messages.yml
 
 # Economy messages
 messages:
@@ -256,7 +256,7 @@ zessentials-migration:
   # Check your zEssentials economy/config.yml — default is "money".
   economy-name: "money"
 
-  # What to do when a record already exists in OreoEssentials:
+  # What to do when a record already exists in OEssentials:
   #   skip      – leave the existing data untouched
   #   overwrite – replace it with the zEssentials value
   on-conflict: "skip"
@@ -267,20 +267,20 @@ zessentials-migration:
   warp-json-path: "plugins/zEssentials/config_storage.json"
 
 # CMI migration
-# Migrates homes / warps / economy from a live CMI instance into OreoEssentials.
+# Migrates homes / warps / economy from a live CMI instance into OEssentials.
 # CMI must be installed and loaded on the same server.
 # Set enabled: true, run /cmimigrate all, then set back to false.
 cmi-migration:
   enabled: false
 
-  # What to do when an OreoEssentials record already exists:
+  # What to do when an OEssentials record already exists:
   #   skip      – leave the existing data untouched
   #   overwrite – replace it with the CMI value
   on-conflict: "skip"
 
 # EssentialsX migration
 # Set enabled: true, run /migrateessentials, then set back to false.
-# Works with all OreoEssentials storage backends: yaml, json, mongodb.
+# Works with all OEssentials storage backends: yaml, json, mongodb.
 essentialsx-migration:
   enabled: false
 
@@ -294,7 +294,7 @@ essentialsx-migration:
     warps: true
     economy: true
 
-  # What to do when an OreoEssentials record already exists for that player/warp:
-  #   skip      – leave the existing OreoEssentials data untouched
+  # What to do when an OEssentials record already exists for that player/warp:
+  #   skip      – leave the existing OEssentials data untouched
   #   overwrite – replace it with the EssentialsX value
   on-conflict: "skip"

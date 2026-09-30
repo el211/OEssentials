@@ -1,0 +1,95 @@
+package fr.elias.oessentials.holograms.internal.nms;
+
+import org.bukkit.Bukkit;
+
+import java.util.List;
+
+public final class NmsBridgeLoader {
+
+    private NmsBridgeLoader() {
+    }
+
+    private static final List<String> FALLBACK_VERSIONS = List.of(
+            "v26_1_2",
+            "v26_1_1",
+            "v26_1",
+            "v1_21_11",
+            "v1_21_10",
+            "v1_21_9",
+            "v1_21_8",
+            "v1_21_7",
+            "v1_21_6",
+            "v1_21_5",
+            "v1_21_4",
+            "v1_21_3",
+            "v1_21_2",
+            "v1_21_1",
+            "v1_21"
+    );
+
+    public static NmsHologramBridge loadOrThrow() {
+
+        // Prefer PacketEvents — version-agnostic and no NMS reflection needed.
+        try {
+            Class.forName("com.github.retrooper.packetevents.PacketEvents");
+            PacketEventsBridge pe = new PacketEventsBridge();
+            Bukkit.getLogger().info("[OHolograms] Using PacketEvents bridge for hologram packets.");
+            return pe;
+        } catch (ClassNotFoundException ignored) {
+            // PacketEvents not on the server — fall through to NMS reflection bridge.
+        }
+
+        String ver = craftBukkitVersion();
+
+        NmsHologramBridge exact = tryLoad(ver);
+        if (exact != null) {
+            return exact;
+        }
+
+        for (String fallback : FALLBACK_VERSIONS) {
+            NmsHologramBridge bridge = tryLoad(fallback);
+            if (bridge != null) {
+                Bukkit.getLogger().warning("[OHolograms] No exact NMS bridge for " + ver + " using fallback " + fallback);
+                return bridge;
+            }
+        }
+
+        // Last-resort: try the highest known version (first entry in FALLBACK_VERSIONS)
+        if (!FALLBACK_VERSIONS.isEmpty()) {
+            String lastResort = FALLBACK_VERSIONS.get(0);
+            NmsHologramBridge bridge = tryLoad(lastResort);
+            if (bridge != null) {
+                Bukkit.getLogger().warning("[OHolograms] Server version " + ver
+                        + " is not supported — loaded last-resort NMS bridge " + lastResort
+                        + ". Per-player text placeholders may not function correctly.");
+                return bridge;
+            }
+        }
+
+        Bukkit.getLogger().warning("[OHolograms] No NMS bridge could be loaded for server version " + ver
+                + ". Per-player text placeholders will be disabled. Holograms will still render using Bukkit API.");
+        return null;
+    }
+
+    private static NmsHologramBridge tryLoad(String ver) {
+        String cls = "fr.elias.oessentials.holograms.internal.nms." + ver + ".Bridge_" + ver;
+        try {
+            return (NmsHologramBridge) Class.forName(cls).getDeclaredConstructor().newInstance();
+        } catch (ClassNotFoundException ignored) {
+            return null;
+        } catch (Throwable t) {
+            Bukkit.getLogger().warning("[OHolograms] Failed to load " + cls + ": " + t.getMessage());
+            return null;
+        }
+    }
+
+    private static String craftBukkitVersion() {
+        String cb = Bukkit.getServer().getClass().getPackage().getName();
+        String fromPackage = cb.substring(cb.lastIndexOf('.') + 1);
+        if (!fromPackage.startsWith("v")) {
+            String mcVer = Bukkit.getServer().getMinecraftVersion();
+            return "v" + mcVer.replace(".", "_");
+        }
+        return fromPackage;
+    }
+}

@@ -1,7 +1,7 @@
 package fr.minuskube.inv;
 
-import fr.elias.oreoEssentials.util.OreScheduler;
-import fr.elias.oreoEssentials.util.OreTask;
+import fr.elias.oessentials.platform.scheduling.OreScheduler;
+import fr.elias.oessentials.platform.scheduling.OreTask;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;

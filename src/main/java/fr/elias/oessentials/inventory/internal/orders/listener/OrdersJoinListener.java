@@ -1,0 +1,87 @@
+package fr.elias.oessentials.inventory.internal.orders.listener;
+
+import fr.elias.oessentials.OEssentials;
+import fr.elias.oessentials.inventory.internal.orders.repository.PendingDeliveryRepository;
+import fr.elias.oessentials.platform.scheduling.OreScheduler;
+import fr.elias.oessentials.inventory.internal.orders.model.PendingDelivery;
+import fr.elias.oessentials.inventory.internal.orders.service.OrderService;
+import org.bukkit.entity.Player;
+import fr.elias.oessentials.inventory.internal.orders.gui.CreateOrderFlow;
+import fr.elias.oessentials.inventory.internal.orders.gui.FillOrderMenu;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.List;
+import java.util.logging.Logger;
+
+/**
+ * Listens for player joins and delivers any items that were queued while they were offline
+ * or on a different server.
+ */
+public final class OrdersJoinListener implements Listener {
+
+    private final OEssentials           plugin;
+    private final PendingDeliveryRepository deliveryRepo;
+    private final Logger                   log;
+
+    public OrdersJoinListener(OEssentials plugin, PendingDeliveryRepository deliveryRepo) {
+        this.plugin       = plugin;
+        this.deliveryRepo = deliveryRepo;
+        this.log          = plugin.getLogger();
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+
+        // Slight delay so the player is fully loaded before we touch their inventory
+        OreScheduler.runLaterForEntity(plugin, player, () -> {
+            if (!player.isOnline()) return;
+
+            deliveryRepo.loadForPlayer(player.getUniqueId())
+                    .thenAccept(deliveries -> {
+                        if (deliveries.isEmpty()) return;
+
+                        log.info("[Orders] Delivering " + deliveries.size()
+                                + " pending item(s) to " + player.getName());
+
+                        // Give items on main thread
+                        OreScheduler.runForEntity(plugin, player, () -> {
+                            for (PendingDelivery delivery : deliveries) {
+                                tryDeliver(player, delivery);
+                            }
+                        });
+                    });
+        }, 20L); // 1 second after join
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onQuit(PlayerQuitEvent event) {
+        CreateOrderFlow.clearPlayer(event.getPlayer().getUniqueId());
+        FillOrderMenu.clearPlayer(event.getPlayer().getUniqueId());
+    }
+
+    private void tryDeliver(Player player, PendingDelivery delivery) {
+        if (!player.isOnline()) return;
+
+        ItemStack item = OrderService.deserializeItem(delivery.getItemData());
+        if (item == null) {
+            log.warning("[Orders] Could not deserialize pending delivery " + delivery.getId()
+                    + " for " + player.getName() + " — skipping.");
+            deliveryRepo.delete(delivery.getId());
+            return;
+        }
+
+        item.setAmount(delivery.getQuantity());
+        OrderService.giveOrDrop(player, item);
+        log.info("[Orders] Delivered " + delivery.getQuantity() + "x "
+                + item.getType() + " to " + player.getName()
+                + " (order=" + delivery.getOrderId() + ")");
+
+        deliveryRepo.delete(delivery.getId());
+    }
+}

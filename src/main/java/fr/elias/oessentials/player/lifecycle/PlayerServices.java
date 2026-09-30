@@ -1,0 +1,21 @@
+package fr.elias.oessentials.player.lifecycle;
+
+import dev.oreo.modulith.core.ModuleApi;
+import fr.elias.oessentials.player.internal.back.service.BackService;
+import fr.elias.oessentials.player.internal.deathback.DeathBackService;
+import fr.elias.oessentials.storage.internal.homes.TeleportBroker;
+import fr.elias.oessentials.player.internal.tp.service.TeleportService;
+import fr.elias.oessentials.player.internal.services.GodService;
+import fr.elias.oessentials.player.internal.services.MessageService;
+import fr.elias.oessentials.player.internal.services.VanishService;
+
+@ModuleApi("services")
+public interface PlayerServices {
+    TeleportService getTeleportService();
+    BackService getBackService();
+    MessageService getMessageService();
+    DeathBackService getDeathBackService();
+    GodService getGodService();
+    VanishService getVanishService();
+    TeleportBroker getTeleportBroker();
+}

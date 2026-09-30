@@ -1,6 +1,6 @@
-name: OreoEssentials
-version: "6.6"
-main: fr.elias.oreoEssentials.OreoEssentials
+name: OEssentials
+version: "${version}"
+main: fr.elias.oessentials.OEssentials
 api-version: "1.21"
 folia-supported: true
 description: "All-in-one essentials plugin with homes/warps/spawn, RTP, economy (Vault), chat tools, portals/jump pads, cross-server EC & player sync."
@@ -19,7 +19,7 @@ loadbefore: [EconomyShopGUI, VendingMachines, PerfRankNPCs, ajLeaderboards, Shop
 
 permissions:
   oreo.*:
-    description: All OreoEssentials features
+    description: All OEssentials features
     default: op
     children:
       oreo.spawn: true
@@ -257,7 +257,7 @@ permissions:
     description: Allows toggling the boss bar
     default: true
   oreo.reload:
-    description: Allows reloading all OreoEssentials configs
+    description: Allows reloading all OEssentials configs
     default: op
   oreo.vault.bypass:
     default: op
@@ -461,7 +461,7 @@ permissions:
     description: Place public IC signs like [ic:name]
   oreo.events:
     default: op
-    description: Manage OreoEssentials event system
+    description: Manage OEssentials event system
 
   # Playtime Rewards (Prewards)
   oreo.prewards:
@@ -660,5 +660,5 @@ permissions:
     default: op
 
   oreo.admin.migrate.cmi:
-    description: Run the CMI → OreoEssentials data migration
+    description: Run the CMI → OEssentials data migration
     default: op

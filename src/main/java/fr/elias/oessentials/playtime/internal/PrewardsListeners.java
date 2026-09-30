@@ -1,0 +1,63 @@
+package fr.elias.oessentials.playtime.internal;
+
+import fr.elias.oessentials.OEssentials;
+import fr.elias.oessentials.platform.scheduling.OreScheduler;
+import fr.elias.oessentials.platform.scheduling.OreTask;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+public final class PrewardsListeners implements Listener {
+    private final OEssentials plugin;
+    private final PlaytimeRewardsService svc;
+
+    private final Map<UUID, OreTask> remindTasks = new HashMap<>();
+
+    public PrewardsListeners(OEssentials plugin, PlaytimeRewardsService svc) {
+        this.plugin = plugin;
+        this.svc = svc;
+    }
+
+    @EventHandler
+    public void onJoin(PlayerJoinEvent e) {
+        final Player p = e.getPlayer();
+
+        svc.checkPlayer(p, true);
+
+        final int mins = svc.notifyEveryMinutes;
+        if (mins <= 0) return;
+
+        OreTask old = remindTasks.remove(p.getUniqueId());
+        if (old != null) old.cancel();
+
+        OreTask task = OreScheduler.runTimerForEntity(
+                plugin,
+                p,
+                () -> {
+                    if (!p.isOnline()) return;
+                    int ready = svc.rewardsReady(p).size();
+                    if (ready > 0 && p.hasPermission("oreo.prewards.notify")) {
+                        // If you added svc.msg(key, def) use that; else fallback text:
+                        p.sendMessage(svc.color("&aYou have rewards ready: &f" + ready));
+                    }
+                },
+                20L * 60,
+                20L * 60 * Math.max(1, mins)
+        );
+
+        remindTasks.put(p.getUniqueId(), task);
+    }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent e) {
+        UUID id = e.getPlayer().getUniqueId();
+        OreTask task = remindTasks.remove(id);
+        if (task != null) task.cancel();
+    }
+}
