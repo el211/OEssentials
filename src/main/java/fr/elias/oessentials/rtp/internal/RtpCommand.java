@@ -241,7 +241,7 @@ public class RtpCommand implements OreoCommand {
             return;
         }
 
-        int radius = cfg.radiusFor(p, List.of(world.getName()));
+        int radius = cfg.radiusFor(p, world.getName());
         int minRadius = cfg.minRadiusFor(p, world.getName());
 
         if (minRadius < 0) minRadius = 0;

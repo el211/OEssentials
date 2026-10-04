@@ -171,11 +171,13 @@ public final class RtpConfig {
         return chooseTargetWorld(p);
     }
 
-    public int radiusFor(Player p, Collection<String> tierPermissionKeys) {
-        // We ignore tierPermissionKeys for now and always check real permission nodes.
+    public int radiusFor(Player p, String worldName) {
         Predicate<String> hasPerm = p::hasPermission;
 
-        String worldKey = "worlds." + p.getWorld().getName();
+        // Use the target world name if provided, otherwise fall back to player's current world
+        String targetWorld = (worldName != null && !worldName.isBlank()) ? worldName : p.getWorld().getName();
+        String worldKey = "worlds." + targetWorld;
+
         if (cfg.isConfigurationSection(worldKey)) {
             int worldDefault = cfg.getInt(worldKey + ".default", cfg.getInt("default", 200));
             int best = worldDefault;
