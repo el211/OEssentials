@@ -14,6 +14,7 @@ public final class PortalsModule extends ManagedModule implements PortalsService
     @Override
     protected void start() {
         initPortals();
+        listenForModuleEvents(this);
     }
 
     @Override public fr.elias.oessentials.portals.internal.PortalsManager getPortals() { return portals; }

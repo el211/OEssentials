@@ -34,7 +34,6 @@ public abstract class ManagedModule implements MinecraftModule {
         try {
             tasks.run(this::start);
             if (!plugin.isEnabled()) throw new IllegalStateException("Plugin disabled during module startup");
-            context.listen(this);
         } catch (RuntimeException failure) {
             active = false;
             tasks.close();
@@ -61,6 +60,12 @@ public abstract class ManagedModule implements MinecraftModule {
     }
 
     protected abstract void start();
+
+    /** Opt in only for objects with @ModuleListener methods. Reflection on ordinary
+     * service modules can otherwise load unavailable optional plugin API types. */
+    protected final void listenForModuleEvents(Object listener) {
+        context.listen(listener);
+    }
 
     @Override
     public final void disable() {

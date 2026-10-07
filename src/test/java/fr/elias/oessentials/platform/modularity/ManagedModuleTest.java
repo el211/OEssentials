@@ -77,6 +77,37 @@ class ManagedModuleTest {
     }
 
     @Test
+    void missingPlaceholderApiDoesNotPreventNonListenerModuleStartup() throws Exception {
+        String fixture = OptionalIntegrationModule.class.getName();
+        ClassLoader isolated = new ClassLoader(getClass().getClassLoader()) {
+            @Override
+            protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
+                if (name.startsWith("me.clip.placeholderapi.")) throw new ClassNotFoundException(name);
+                if (!name.equals(fixture)) return super.loadClass(name, resolve);
+                Class<?> loaded = findLoadedClass(name);
+                if (loaded == null) {
+                    try (var input = getParent().getResourceAsStream(name.replace('.', '/') + ".class")) {
+                        byte[] bytes = java.util.Objects.requireNonNull(input).readAllBytes();
+                        loaded = defineClass(name, bytes, 0, bytes.length);
+                    } catch (java.io.IOException e) {
+                        throw new ClassNotFoundException(name, e);
+                    }
+                }
+                if (resolve) resolveClass(loaded);
+                return loaded;
+            }
+        };
+        var module = isolated.loadClass(fixture).asSubclass(ManagedModule.class);
+        // Reproduce the exact failure triggered by the old unconditional event scan.
+        assertThrows(NoClassDefFoundError.class, module::getDeclaredMethods);
+        try (var runtime = ModuleRuntime.builder().modules(List.of(module))
+                .platformService(JavaPlugin.class, plugin).start()) {
+            assertNotNull(registry.require(OptionalIntegrationApi.class));
+        }
+        assertThrows(IllegalStateException.class, () -> registry.require(OptionalIntegrationApi.class));
+    }
+
+    @Test
     void missingPluginDependencyAlsoRollsBackStartedModules() {
         assertThrows(RuntimeException.class, () -> ModuleRuntime.builder()
                 .modules(List.of(StorageModule.class, LinkageFailureModule.class))
@@ -99,6 +130,13 @@ class ManagedModuleTest {
     @ModuleApi("failure") public interface FailureApi {}
     @ModuleApi("bad-cleanup") public interface BadCleanupApi {}
     @ModuleApi("linkage") public interface LinkageApi {}
+    @ModuleApi("optional") public interface OptionalIntegrationApi {}
+
+    @PluginModule("test-optional-integration")
+    public static final class OptionalIntegrationModule extends ManagedModule implements OptionalIntegrationApi {
+        @Override protected void start() {}
+        public me.clip.placeholderapi.expansion.PlaceholderExpansion getExpansion() { return null; }
+    }
 
     @PluginModule("test-storage")
     public static final class StorageModule extends ManagedModule implements StorageApi {
@@ -116,6 +154,7 @@ class ManagedModuleTest {
         @Override protected void start() {
             assertTrue(services(StorageApi.class).isOpen());
             calls.add("consumer-start");
+            listenForModuleEvents(this);
             cleanup("consumer", () -> {
                 assertTrue(services(StorageApi.class).isOpen(), "Storage closed before consumer");
                 assertFalse(isActive());

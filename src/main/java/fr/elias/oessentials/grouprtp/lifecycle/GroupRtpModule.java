@@ -12,6 +12,7 @@ public final class GroupRtpModule extends ManagedModule implements GroupRtpServi
     @Override
     protected void start() {
         initGroupRtp();
+        listenForModuleEvents(this);
     }
 
     @Override public fr.elias.oessentials.grouprtp.internal.GroupRtpModule getGroupRtpModule() { return groupRtpModule; }

@@ -25,6 +25,9 @@ public final class YamlPlayerSyncStorage implements PlayerSyncStorage {
 
     @Override
     public synchronized PlayerSyncSnapshot load(UUID uuid) throws Exception {
+        // A fresh server has no snapshots until the first save. Keep real read/parse
+        // failures visible; only a confirmed missing file means there is no data yet.
+        if (java.nio.file.Files.notExists(file.toPath())) return null;
         cfg.load(file); // reload from disk to avoid stale in-memory cache
         String b64 = cfg.getString("players." + uuid + ".blob", null);
         if (b64 == null) return null;

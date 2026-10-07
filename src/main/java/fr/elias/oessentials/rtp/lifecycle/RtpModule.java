@@ -23,6 +23,7 @@ public final class RtpModule extends ManagedModule implements RtpServices {
     @Override
     protected void start() {
         initRtp();
+        listenForModuleEvents(this);
     }
 
     @Override public RtpPendingService getRtpPendingService() { return rtpPendingService; }

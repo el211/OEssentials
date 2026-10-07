@@ -29,6 +29,7 @@ public final class CurrencySystemModule extends ManagedModule implements Currenc
     @Override
     protected void start() {
         initCurrencySystem();
+        listenForModuleEvents(this);
     }
 
     @Override public CurrencyService getCurrencyService() { return currencyService; }

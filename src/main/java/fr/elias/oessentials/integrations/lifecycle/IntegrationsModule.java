@@ -80,7 +80,7 @@ public final class IntegrationsModule extends ManagedModule implements Integrati
     }
 
     // -------------------------------------------------------------------------
-    // Missing-dependency warning banner
+    // Missing-dependency warnings
     // -------------------------------------------------------------------------
 
     private void warnMissingDependencies() {
@@ -109,42 +109,16 @@ public final class IntegrationsModule extends ManagedModule implements Integrati
 
         if (missing.isEmpty()) return;
 
-        String sep  = "+=================================================+";
-        String side = "|";
-
-        plugin.getLogger().warning(sep);
-        plugin.getLogger().warning(side + "                                                 " + side);
-        plugin.getLogger().warning(side + "    .oOOOo.  oOoOOoOOo ooOoOOo ooOoOOo         " + side);
-        plugin.getLogger().warning(side + "   .O     o.     O      O       O               " + side);
-        plugin.getLogger().warning(side + "   o       O     o      o       o               " + side);
-        plugin.getLogger().warning(side + "   O       o     O      O ooO   O ooO           " + side);
-        plugin.getLogger().warning(side + "   o       O     o      o       o               " + side);
-        plugin.getLogger().warning(side + "   `o     O'     O      O       O               " + side);
-        plugin.getLogger().warning(side + "    `OoooO'  OOoOOoOo ooOooOoO ooOooOoO        " + side);
-        plugin.getLogger().warning(side + "                                                 " + side);
-        plugin.getLogger().warning(side + "       !! MISSING DEPENDENCIES DETECTED !!      " + side);
-        plugin.getLogger().warning(side + "                                                 " + side);
-        plugin.getLogger().warning(sep);
-
-        int idx = 1;
         for (String[] dep : missing) {
             String name    = dep[0];
             String reason  = dep[1];
             String impact  = dep[2];
             String url     = dep[3];
-            plugin.getLogger().warning(side + " [" + idx + "] " + name);
-            plugin.getLogger().warning(side + "     Reason : " + reason);
-            plugin.getLogger().warning(side + "     Impact : " + impact);
-            plugin.getLogger().warning(side + "     Fix    : Install from " + url);
-            if (idx < missing.size()) plugin.getLogger().warning(side);
-            idx++;
+            plugin.getLogger().warning("Missing dependency: " + name + ". Please download it: " + url);
+            plugin.getLogger().warning("Reason: " + reason + ". Impact: " + impact);
         }
 
-        plugin.getLogger().warning(sep);
-        plugin.getLogger().warning(side + "  The plugin will continue, but affected        " + side);
-        plugin.getLogger().warning(side + "  features will be degraded or unavailable.     " + side);
-        plugin.getLogger().warning(side + "                                                 " + side);
-        plugin.getLogger().warning(sep);
+        plugin.getLogger().warning("OEssentials will continue with affected features limited. Install the missing plugins and restart the server.");
     }
 
     private void showCompletionBanner() {
